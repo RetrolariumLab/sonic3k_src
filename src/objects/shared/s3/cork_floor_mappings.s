@@ -4,7 +4,7 @@
 Map_AIZCorkFloor:
                 include "src/objects/shared/zones/aiz/mappings/cork_floor.s"
 Map_AIZCorkFloor2:
-                include "src/objects/shared/zones/aiz/mappings/cork_floor_2.s"
+                include "src/objects/shared/zones/aiz/mappings/cork_floor_act2.s"
 Map_CNZCorkFloor:
                 include "src/objects/shared/zones/cnz/mappings/cork_floor.s"
 Map_ICZCorkFloor:

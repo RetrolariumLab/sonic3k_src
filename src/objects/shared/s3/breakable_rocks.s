@@ -626,6 +626,6 @@ S3Rock_CompFragmentRightVel:
 Map_AIZRock:
                 include "src/objects/shared/zones/aiz/mappings/rock.s"
 Map_AIZRock2:
-                include "src/objects/shared/zones/aiz/mappings/rock_2.s"
+                include "src/objects/shared/zones/aiz/mappings/rock_act2.s"
 Map_EMZRock:
                 include "src/objects/shared/zones/emz/mappings/rock.s"

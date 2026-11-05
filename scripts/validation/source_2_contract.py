@@ -9,6 +9,7 @@ from scripts.build.make_interface import recipes
 from scripts.build.project import ROOT
 from scripts.validation.documentation import document_inventory, tracked
 from scripts.validation.label_renames import validate_registry
+from scripts.validation.release_tags import check_tag, read_tag
 
 MANIFEST = "config/source_reconstruction_2_0.json"
 REQUIREMENTS = frozenset(
@@ -68,8 +69,26 @@ def validate_history(root, manifest):
     base = manifest["predecessor"]["commit"]
     if not re.fullmatch(r"[0-9a-f]{40}", base):
         raise ValueError("Predecessor needs an exact commit")
-    subprocess.run(["git", "merge-base", "--is-ancestor", base, "HEAD"], cwd=root, check=True, capture_output=True)
-    delta = set(git(root, "rev-list", base + "..HEAD").splitlines())
+    head = git(root, "rev-parse", "HEAD")
+    history = manifest.get("delta_history", {})
+    tip = history.get("published_commit", head)
+    if "published_commit" in history:
+        if not isinstance(tip, str) or not re.fullmatch(r"[0-9a-f]{40}", tip):
+            raise ValueError("Published Source 2.0 needs an exact commit")
+        subprocess.run(["git", "merge-base", "--is-ancestor", tip, head], cwd=root, check=True, capture_output=True)
+        published = json.loads(git(root, "show", tip + ":" + MANIFEST))
+        if (
+            manifest["tag"] != published["tag"]
+            or manifest["predecessor"] != published["predecessor"]
+            or manifest["delta"] != published["delta"]
+            or {k: v for k, v in history.items() if k != "published_commit"} != published["delta_history"]
+        ):
+            raise ValueError("Published Source 2.0 delta differs from its recorded commit")
+        tag = read_tag(root, manifest["tag"])
+        if tag is not None:
+            check_tag(tag, manifest["tag"], tip)
+    subprocess.run(["git", "merge-base", "--is-ancestor", base, tip], cwd=root, check=True, capture_output=True)
+    delta = set(git(root, "rev-list", base + ".." + tip).splitlines())
     entries, declared, identifiers = manifest.get("delta", []), [], []
     for row in entries:
         if not all(row.get(k) for k in ("id", "kind", "summary", "commits")):
@@ -81,13 +100,11 @@ def validate_history(root, manifest):
     if declared.count("release-commit") != 1:
         raise ValueError("Delta must identify its current substantive release stage")
     explicit = set(declared) - {"release-commit"}
-    head = git(root, "rev-parse", "HEAD")
-    if not explicit <= delta or delta - explicit not in (set(), {head}):
+    if not explicit <= delta or delta - explicit not in (set(), {tip}):
         raise ValueError("Delta omits a non-current commit or claims foreign history")
-    history = manifest.get("delta_history", {})
     if history.get("base_commit") != base or history.get("tip") != "release-commit":
         raise ValueError("Delta bounds disagree with predecessor")
-    expected_count = len(delta) + (head in explicit)
+    expected_count = len(delta) + (tip in explicit)
     if history.get("commit_count") != expected_count:
         raise ValueError("Delta commit count is stale")
     tag = manifest["predecessor"]["tag"]

@@ -16,6 +16,9 @@ from scripts.validation.semantic_label_edits import apply_edits, code_fingerprin
 
 INDEX = "config/reconstruction/semantic_labels.json"
 SHARDS = "config/reconstruction/semantic_labels"
+LAYOUT = "config/reconstruction/source_layout.json"
+SOURCE_PATH = re.compile(r"src/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+\.(?:s|asm|inc)")
+SOURCE_INCLUDE = re.compile(r'(^[ \t]*(?:[A-Za-z_.][\w.]*:[ \t]*)?include[ \t]+")([^"\n]+)"', re.I | re.M)
 PROFILES = frozenset(("s3-us", "s3-eu", "s3-jp", "sk"))
 NAME = re.compile(r"\.?[A-Za-z_][A-Za-z_0-9]*$")
 DECLARATION = re.compile(r"^\s*([A-Za-z_.][A-Za-z_0-9.]*)\s*(?::|\s+(?:equ|set|equs|=)\s+)", re.I)
@@ -71,6 +74,37 @@ def read(root, name):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def source_moves(root):
+    """Read bijective moves from historical names to live source owners."""
+    if not (root / LAYOUT).exists():
+        return {}
+    layout = read(root, LAYOUT)
+    rows = layout.get("path_moves", [])
+    if not isinstance(rows, list):
+        raise ValueError("Source path moves must be an ordered list")
+    owners = {row["path"] for row in layout["files"]}
+    moves, used = {}, set()
+    for row in rows:
+        if not isinstance(row, dict) or set(row) != {"historical", "current"}:
+            raise ValueError("Invalid source path move")
+        old, new = row["historical"], row["current"]
+        if not all(isinstance(path, str) and SOURCE_PATH.fullmatch(path) for path in (old, new)):
+            raise ValueError("A source path move must stay inside src")
+        if (
+            old in moves
+            or new.casefold() in used
+            or old in owners
+            or new not in owners
+            or (root / old).exists()
+            or not (root / new).resolve().is_relative_to(root)
+            or not (root / new).is_file()
+        ):
+            raise ValueError("Source path move requires one distinct live owner: " + old)
+        moves[old] = new
+        used.add(new.casefold())
+    return moves
+
+
 @lru_cache(maxsize=4)
 def historical_texts(root, revision):
     if not re.fullmatch(r"[0-9a-f]{40}", revision):
@@ -101,7 +135,7 @@ def historical_source(root, revision):
     return sources, targets
 
 
-def _legacy_edits(originals, previous, current, policy):
+def _legacy_edits(originals, previous, current, policy, historical_paths):
     """Project a change in a legacy destination onto the immutable source tokens."""
 
     def identities(rows):
@@ -117,7 +151,7 @@ def _legacy_edits(originals, previous, current, policy):
     engine_files = defaultdict(set)
     for profile, engine in policy["engines"].items():
         for path in engine["sources"]:
-            engine_files[path].add(profile)
+            engine_files[historical_paths.get(path, path)].add(profile)
     by_name = defaultdict(list)
     definitions = defaultdict(dict)
     for key, row in before.items():
@@ -173,6 +207,10 @@ def validate(root=ROOT, index=None):
     if not isinstance(value.get("packets"), list) or not value["packets"]:
         raise ValueError("Semantic migration has no subsystem partition")
     sources, targets = historical_source(str(root), value.get("baseline_commit", ""))
+    moves = source_moves(root)
+    if not moves.keys() <= sources.keys() or sources.keys() & moves.values():
+        raise ValueError("Source path moves differ from the historical ownership scope")
+    historical_paths = {current: old for old, current in moves.items()}
     if (
         type(value.get("target_count")) is not int
         or value["target_count"] != len(targets)
@@ -342,7 +380,7 @@ def validate(root=ROOT, index=None):
         )
         current_registry = read(root, REGISTRY)
         legacy_views, legacy_definitions = _legacy_edits(
-            originals, earlier_registry["renames"], current_registry["renames"], read(root, POLICY)
+            originals, earlier_registry["renames"], current_registry["renames"], read(root, POLICY), historical_paths
         )
         for path, edits in legacy_views.items():
             if any((path, row["code_line"], row["token"]) in edited_coordinates for row in edits):
@@ -354,6 +392,7 @@ def validate(root=ROOT, index=None):
     result = {
         "index": value,
         "source_views": dict(views),
+        "historical_paths": historical_paths,
         "target_count": len(targets),
         "applied_targets": applied_count,
     }
@@ -363,7 +402,7 @@ def validate(root=ROOT, index=None):
     records = []
     candidates = defaultdict(set)
     for path, original in sources.items():
-        source = (root / path).resolve()
+        source = (root / moves.get(path, path)).resolve()
         if not source.is_relative_to(root) or not source.is_file():
             raise ValueError("Missing or escaping semantic source: " + path)
         text = source.read_text(encoding="utf-8")
@@ -399,6 +438,9 @@ def original_view(path, text, result):
     """Reverse only registered tokens; retain a strict historical statement view."""
     for edits in reversed(result["source_views"].get(path, [])):
         text = apply_edits(text, [{**row, "old": row["new"], "new": row["old"]} for row in edits])
+    historical = result.get("historical_paths")
+    if historical:
+        text = SOURCE_INCLUDE.sub(lambda match: match[1] + historical.get(match[2], match[2]) + '"', text)
     return text
 
 

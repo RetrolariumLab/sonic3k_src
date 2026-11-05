@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_2/sk
+; Owner: objects/bosses/lbz/grabber_ship/sk
 ; Responsibility: Launch Base final boss object attributes, child construction, animation, mappings and palette resources
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ObjDat_LBZFinalBoss2:

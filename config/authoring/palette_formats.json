@@ -184,7 +184,7 @@
       "file_frames": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/ending_catalog.s",
       "scope": "PalSPtr_LBZFinalBoss2_FadeIn",
       "first_line": 221,
       "last_line": 228,
@@ -195,7 +195,7 @@
       "file_frames": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/ending_catalog.s",
       "scope": "PalSPtr_LBZFinalBoss2_FadeOut",
       "first_line": 231,
       "last_line": 238,

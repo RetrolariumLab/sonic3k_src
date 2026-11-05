@@ -11,7 +11,9 @@ import subprocess
 import tarfile
 
 from scripts.build.project import ROOT
-from scripts.validation.semantic_labels import INDEX, profile_maps as semantic_maps, validate as validate_semantics
+from scripts.validation.semantic_labels import INDEX, source_moves
+from scripts.validation.semantic_labels import profile_maps as semantic_maps
+from scripts.validation.semantic_labels import validate as validate_semantics
 
 REGISTRY = "config/reconstruction/label_renames.json"
 POLICY = "config/reconstruction/relocation.json"
@@ -91,6 +93,7 @@ def validate_registry(root=ROOT, registry=None):
     if len(value["renames"]) != len(original):
         raise ValueError("Label migration omits or duplicates an original definition")
     policy = read(root, POLICY)
+    moves = source_moves(root)
     profiles = defaultdict(set)
     for profile, engine in policy["engines"].items():
         for name in engine["sources"]:
@@ -123,7 +126,7 @@ def validate_registry(root=ROOT, registry=None):
         if (
             not expected_profiles
             or row.get("profiles") != expected_profiles
-            or profiles[path] != set(expected_profiles)
+            or profiles[moves.get(path, path)] != set(expected_profiles)
         ):
             raise ValueError("Rename compilation scope differs from its historical source")
         for profile in expected_profiles:
@@ -131,7 +134,7 @@ def validate_registry(root=ROOT, registry=None):
             if key in proposed:
                 raise ValueError("Proposed label collides in one compilation namespace")
             proposed.add(key)
-            expected_definitions[key] = path
+            expected_definitions[key] = moves.get(path, path)
     if seen != original_set:
         raise ValueError("Label migration lacks an original physical identity")
     old_tokens = re.compile(r"\b(?:" + "|".join(re.escape(r["old"]) for r in value["renames"]) + r")\b", re.I)

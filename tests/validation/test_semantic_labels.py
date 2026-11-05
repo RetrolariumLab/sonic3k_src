@@ -38,7 +38,9 @@ class IncrementalLabelTests(unittest.TestCase):
         cls.addClassCleanup(cleanup)
         cls.original = {
             "src/game/s3/example.s": 'loc_100:\n._1:\n bra.s ._1\n.Existing:\n dc.b "loc_100"\nlocret_110:\n rts\nOtherScope:\n._1:\n rts\n',
-            "src/game/sk/example.s": "loc_100:\n rts\n",
+            "src/game/sk/example.s": (
+                'loc_100:\n rts\nImportFixture: include "src/game/s3/example.s"\n dc.b "src/game/s3/example.s"\n'
+            ),
         }
         for name, text in cls.original.items():
             path = cls.root / name
@@ -261,7 +263,14 @@ class IncrementalLabelTests(unittest.TestCase):
     def test_classifier_retains_palette_words_and_existing_procedure_names(self):
         for name in ("Pal_fade_delay", "Pal_fade_delay2", "ReadFixture", "sub_1234"):
             self.assertFalse(inherited(name), name)
-        for name in ("Frame_1234", "locret_1234", "loc_FACE", "._100", "_unkEF44_1", "_tempFF88"):
+        for name in (
+            "Frame_1234",
+            "locret_1234",
+            "loc_FACE",
+            "._100",
+            "_unkEF44_1",
+            "_tempFF88",
+        ):
             self.assertTrue(inherited(name), name)
 
     def test_original_view_restores_every_registered_reference(self):
@@ -273,11 +282,47 @@ class IncrementalLabelTests(unittest.TestCase):
             "; Explain the retained fixture branch.\n" + self.original[path],
         )
 
+    def test_source_move_preserves_symbols_and_reverses_only_includes(self):
+        self.apply()
+        old = "src/game/s3/example.s"
+        new = "src/game/s3/descriptive.s"
+        (self.root / old).rename(self.root / new)
+        self.addCleanup((self.root / new).unlink)
+        registry = self.root / "config/reconstruction/source_layout.json"
+        self.addCleanup(registry.unlink)
+        registry.write_text(
+            json.dumps(
+                {
+                    "path_moves": [{"historical": old, "current": new}],
+                    "files": [{"path": new}],
+                }
+            ),
+            encoding="utf-8",
+        )
+        consumer = self.root / "src/game/sk/example.s"
+        original = self.original["src/game/sk/example.s"]
+        updated = original.replace(f'include "{old}"', f'include "{new}"')
+        consumer.write_text(updated, encoding="utf-8")
+        result = validate(self.root, self.index)
+        self.assertTrue(all(row["source"] == old for row in result["mappings"]))
+        self.assertEqual(original_view("src/game/sk/example.s", updated, result), original)
+
+        consumer.write_text(updated.replace(f'dc.b "{old}"', f'dc.b "{new}"'), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "Unregistered code"):
+            validate(self.root, self.index)
+
     def test_unregistered_code_literals_and_context_changes_fail(self):
         path = self.index["packets"][0]["sources"][0]["path"]
-        for old, new in ((" rts", " nop"), ('"loc_100"', '"ReadFixture"'), ("bra.s", "bra.w")):
+        for old, new in (
+            (" rts", " nop"),
+            ('"loc_100"', '"ReadFixture"'),
+            ("bra.s", "bra.w"),
+        ):
             (self.root / path).write_text(self.original[path].replace(old, new), encoding="utf-8")
-            with self.subTest(old=old), self.assertRaisesRegex(ValueError, "Unregistered code"):
+            with (
+                self.subTest(old=old),
+                self.assertRaisesRegex(ValueError, "Unregistered code"),
+            ):
                 validate(self.root, self.index)
 
     def test_destinations_cannot_drift_from_the_reviewed_catalog(self):

@@ -484,14 +484,14 @@ S3Animal_MoveScorePopupToApex:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_Animals1:
-                include "src/objects/shared/animals/mappings/set_1.s"
+                include "src/objects/shared/animals/mappings/compact_hop_frames.s"
 Map_Animals2:
-                include "src/objects/shared/animals/mappings/set_2.s"
+                include "src/objects/shared/animals/mappings/shared_wide_frames.s"
 Map_Animals3:
-                include "src/objects/shared/animals/mappings/set_3.s"
+                include "src/objects/shared/animals/mappings/species_wide_frames.s"
 Map_Animals4:
-                include "src/objects/shared/animals/mappings/set_4.s"
+                include "src/objects/shared/animals/mappings/low_hop_frames.s"
 Map_Animals5:
-                include "src/objects/shared/animals/mappings/set_5.s"
+                include "src/objects/shared/animals/mappings/tall_hop_frames.s"
 Map_EnemyScore:
                 include "src/objects/shared/enemy_misc/mappings/enemy_points.s"

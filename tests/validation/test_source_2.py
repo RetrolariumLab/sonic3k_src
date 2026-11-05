@@ -153,10 +153,21 @@ class PublicCommandTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix="release-smoke-", dir=base)
         cls.root = Path(cls.temporary.name) / "clone"
         subprocess.run(
-            ["git", "clone", "--quiet", "--no-hardlinks", str(ROOT), str(cls.root)], check=True, capture_output=True
+            ["git", "clone", "--quiet", "--no-hardlinks", "--no-tags", str(ROOT), str(cls.root)],
+            check=True,
+            capture_output=True,
         )
-        # Include the candidate public worktree without any ignored/private files.
-        for name in tracked(ROOT):
+        # Mirror the candidate public files, including staged moves and removals.
+        names = tracked(ROOT)
+        removed = sorted(set(tracked(cls.root)) - set(names))
+        if removed:
+            subprocess.run(
+                ["git", "--literal-pathspecs", "rm", "--quiet", "--", *removed],
+                cwd=cls.root,
+                check=True,
+                capture_output=True,
+            )
+        for name in names:
             destination = cls.root / name
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / name, destination)
@@ -189,7 +200,7 @@ class PublicCommandTests(unittest.TestCase):
             self.assertIn("ValueError", result.stderr)
             self.manifest_path.write_bytes(self.original)
 
-    def test_empty_release_commit_is_rejected_in_a_temporary_history(self):
+    def test_empty_post_release_commit_is_rejected_in_a_temporary_history(self):
         empty = Path(self.temporary.name) / "empty-history"
         subprocess.run(
             ["git", "clone", "--quiet", "--no-hardlinks", str(ROOT), str(empty)], check=True, capture_output=True
@@ -213,23 +224,6 @@ class PublicCommandTests(unittest.TestCase):
             capture_output=True,
         )
         manifest = json.loads(self.original)
-        actual = subprocess.check_output(
-            ["git", "rev-list", manifest["predecessor"]["commit"] + "..HEAD"], cwd=empty, text=True
-        ).splitlines()
-        explicit = {commit for row in manifest["delta"] for commit in row["commits"]} - {"release-commit"}
-        # A committed candidate HEAD may already occupy the release boundary.
-        # Declare every ordinary predecessor so the failure reaches the empty-commit audit.
-        missing = sorted(set(actual[1:]) - explicit)
-        if missing:
-            manifest["delta"].append(
-                {
-                    "id": "fixture-preceding-stage",
-                    "kind": "validation",
-                    "summary": "Preserve the current candidate boundary in this fixture.",
-                    "commits": missing,
-                }
-            )
-        manifest["delta_history"]["commit_count"] = len(actual)
         with self.assertRaisesRegex(ValueError, "empty commit"):
             validate_history(empty, manifest)
 

@@ -23,6 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
+    "published_commit": "e7f0623beed91ab4234fc4b36c637af2d00e5e29",
     "commit_count": 183
   },
   "included_scope": [

@@ -336,11 +336,11 @@ Map_AIZIntroPlane:
 Map_AIZIntroEmeralds:
                 include "src/objects/shared/zones/aiz/mappings/intro_emeralds.s"
 Map_LBZFinalBoss1:
-                include "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s"
+                include "src/objects/shared/zones/lbz/final_boss/mappings/tower_cannon.s"
 Map_LBZDeathEggSmall:
                 include "src/objects/shared/zones/lbz/mappings/death_egg_small.s"
 Pal_MGZFadeCNZ:
                 binclude "data/Levels/MGZ/Palettes/Fade to CNZ.bin"
                 even
 Map_LBZFinalBoss2:
-                include "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s"
+                include "src/objects/shared/zones/lbz/final_boss/mappings/grabber_ship.s"

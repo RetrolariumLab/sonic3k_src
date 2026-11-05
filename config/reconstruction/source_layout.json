@@ -8,6 +8,132 @@
     "cohesion_max": 900,
     "hard_review": 2000
   },
+  "path_moves": [
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "current": "src/objects/bosses/lbz/tower_cannon/s3/battle_and_attacks.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "current": "src/objects/bosses/lbz/tower_cannon/s3/motion_helpers.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "current": "src/objects/bosses/lbz/tower_cannon/s3/object_catalog.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "current": "src/objects/bosses/lbz/tower_cannon/sk/knuckles_battle.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "current": "src/objects/bosses/lbz/tower_cannon/sk/object_catalog.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "current": "src/objects/bosses/lbz/tower_cannon/sk/sonic_tails_battle.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/s3/attachments_and_effects.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/s3/battle_control.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/s3/defeat_and_ending.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/s3/ending_catalog.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/s3/ending_helpers.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/sk/attachments_and_effects.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/sk/battle_control.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/sk/motion_helpers.s"
+    },
+    {
+      "historical": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "current": "src/objects/bosses/lbz/grabber_ship/sk/object_catalog.s"
+    },
+    {
+      "historical": "src/objects/shared/animals/mappings/set_1.s",
+      "current": "src/objects/shared/animals/mappings/compact_hop_frames.s"
+    },
+    {
+      "historical": "src/objects/shared/animals/mappings/set_2.s",
+      "current": "src/objects/shared/animals/mappings/shared_wide_frames.s"
+    },
+    {
+      "historical": "src/objects/shared/animals/mappings/set_3.s",
+      "current": "src/objects/shared/animals/mappings/species_wide_frames.s"
+    },
+    {
+      "historical": "src/objects/shared/animals/mappings/set_4.s",
+      "current": "src/objects/shared/animals/mappings/low_hop_frames.s"
+    },
+    {
+      "historical": "src/objects/shared/animals/mappings/set_5.s",
+      "current": "src/objects/shared/animals/mappings/tall_hop_frames.s"
+    },
+    {
+      "historical": "src/objects/shared/world/sk_pointers_1.s",
+      "current": "src/objects/shared/world/s3_object_pointers.s"
+    },
+    {
+      "historical": "src/objects/shared/world/sk_pointers_2.s",
+      "current": "src/objects/shared/world/sk_object_pointers.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/aiz/mappings/collapsing_platform_2.s",
+      "current": "src/objects/shared/zones/aiz/mappings/collapsing_platform_act2.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/aiz/mappings/cork_floor_2.s",
+      "current": "src/objects/shared/zones/aiz/mappings/cork_floor_act2.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/aiz/mappings/falling_log_2.s",
+      "current": "src/objects/shared/zones/aiz/mappings/falling_log_act2.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/aiz/mappings/log_splash_2.s",
+      "current": "src/objects/shared/zones/aiz/mappings/log_splash_act2.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/aiz/mappings/rock_2.s",
+      "current": "src/objects/shared/zones/aiz/mappings/rock_act2.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/hcz/mappings/water_splash_2.s",
+      "current": "src/objects/shared/zones/hcz/mappings/water_skimming_splash.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "current": "src/objects/shared/zones/lbz/final_boss/mappings/tower_cannon.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "current": "src/objects/shared/zones/lbz/final_boss/mappings/grabber_ship.s"
+    },
+    {
+      "historical": "src/objects/shared/zones/lrz/mappings/breakable_rock_2.s",
+      "current": "src/objects/shared/zones/lrz/mappings/breakable_rock_act2.s"
+    }
+  ],
   "files": [
     {
       "path": "src/audio/banks/s3/dac_bank_1.s",
@@ -17460,8 +17586,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
-      "owner": "objects/bosses/lbz/final_boss_1/s3",
+      "path": "src/objects/bosses/lbz/tower_cannon/s3/battle_and_attacks.s",
+      "owner": "objects/bosses/lbz/tower_cannon/s3",
       "responsibility": "Launch Base first final boss battle state, attacks and coordinated child actors.",
       "role": "code",
       "status": "owned",
@@ -17500,8 +17626,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
-      "owner": "objects/bosses/lbz/final_boss_1/s3",
+      "path": "src/objects/bosses/lbz/tower_cannon/s3/motion_helpers.s",
+      "owner": "objects/bosses/lbz/tower_cannon/s3",
       "responsibility": "Launch Base first final boss motion, collision, hit response and child positioning helpers.",
       "role": "code",
       "status": "owned",
@@ -17545,8 +17671,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
-      "owner": "objects/bosses/lbz/final_boss_1/s3",
+      "path": "src/objects/bosses/lbz/tower_cannon/s3/object_catalog.s",
+      "owner": "objects/bosses/lbz/tower_cannon/s3",
       "responsibility": "Launch Base first final boss object attributes, child records, animation and palette resources.",
       "role": "data",
       "status": "owned",
@@ -17585,8 +17711,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
-      "owner": "objects/bosses/lbz/final_boss_1/sk",
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/knuckles_battle.s",
+      "owner": "objects/bosses/lbz/tower_cannon/sk",
       "responsibility": "Launch Base Knuckles final-boss variant, coordinated actors, motion and collision helpers.",
       "role": "code",
       "status": "owned",
@@ -17615,8 +17741,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
-      "owner": "objects/bosses/lbz/final_boss_1/sk",
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/object_catalog.s",
+      "owner": "objects/bosses/lbz/tower_cannon/sk",
       "responsibility": "Launch Base first final-boss variants object attributes, child construction, animation and palette resources.",
       "role": "data",
       "status": "owned",
@@ -17645,8 +17771,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
-      "owner": "objects/bosses/lbz/final_boss_1/sk",
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/sonic_tails_battle.s",
+      "owner": "objects/bosses/lbz/tower_cannon/sk",
       "responsibility": "Launch Base first final-boss battle controller, attack state and helper callbacks for Sonic or Tails.",
       "role": "code",
       "status": "owned",
@@ -17675,8 +17801,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
-      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/attachments_and_effects.s",
+      "owner": "objects/bosses/lbz/grabber_ship/s3",
       "responsibility": "Launch Base second final boss attachments, arms, circular motion, attack actors and detached effects.",
       "role": "code",
       "status": "owned",
@@ -17715,8 +17841,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
-      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/battle_control.s",
+      "owner": "objects/bosses/lbz/grabber_ship/s3",
       "responsibility": "Launch Base second final boss initialization, battle state, player interaction and defeat control.",
       "role": "code",
       "status": "owned",
@@ -17755,8 +17881,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
-      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/defeat_and_ending.s",
+      "owner": "objects/bosses/lbz/grabber_ship/s3",
       "responsibility": "Launch Base second final boss defeat, ending pose actors, palette transition and ending handoff.",
       "role": "code",
       "status": "owned",
@@ -17795,8 +17921,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
-      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/ending_helpers.s",
+      "owner": "objects/bosses/lbz/grabber_ship/s3",
       "responsibility": "Launch Base final battle and ending motion, collision, art scaling and external player-sprite animation helpers.",
       "role": "code",
       "status": "owned",
@@ -17835,8 +17961,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
-      "owner": "objects/bosses/lbz/final_boss_2/s3",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/ending_catalog.s",
+      "owner": "objects/bosses/lbz/grabber_ship/s3",
       "responsibility": "Launch Base second final boss and unused Robotnik attributes, child records, ending poses, palettes and fade catalogs.",
       "role": "data",
       "status": "owned",
@@ -17875,8 +18001,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
-      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "path": "src/objects/bosses/lbz/grabber_ship/sk/attachments_and_effects.s",
+      "owner": "objects/bosses/lbz/grabber_ship/sk",
       "responsibility": "Launch Base final boss attached actors, orbiting parts, capture children and defeat effects with private placement records.",
       "role": "code",
       "status": "owned",
@@ -17905,8 +18031,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
-      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "path": "src/objects/bosses/lbz/grabber_ship/sk/battle_control.s",
+      "owner": "objects/bosses/lbz/grabber_ship/sk",
       "responsibility": "Launch Base final boss battle controller, player capture or release, defeat and scene transition.",
       "role": "code",
       "status": "owned",
@@ -17935,8 +18061,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
-      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "path": "src/objects/bosses/lbz/grabber_ship/sk/motion_helpers.s",
+      "owner": "objects/bosses/lbz/grabber_ship/sk",
       "responsibility": "Launch Base final boss player response, palette, motion and parent or child callback helpers.",
       "role": "code",
       "status": "owned",
@@ -17970,8 +18096,8 @@
       ]
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
-      "owner": "objects/bosses/lbz/final_boss_2/sk",
+      "path": "src/objects/bosses/lbz/grabber_ship/sk/object_catalog.s",
+      "owner": "objects/bosses/lbz/grabber_ship/sk",
       "responsibility": "Launch Base final boss object attributes, child construction, animation, mappings and palette resources.",
       "role": "data",
       "status": "owned",
@@ -31539,7 +31665,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_1.s",
+      "path": "src/objects/shared/animals/mappings/compact_hop_frames.s",
       "owner": "objects/shared/animals",
       "responsibility": "Assembler data for General/Sprites/Animals/Map - Animals 1",
       "role": "data",
@@ -31590,7 +31716,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_2.s",
+      "path": "src/objects/shared/animals/mappings/shared_wide_frames.s",
       "owner": "objects/shared/animals",
       "responsibility": "Assembler data for General/Sprites/Animals/Map - Animals 2",
       "role": "data",
@@ -31641,7 +31767,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_3.s",
+      "path": "src/objects/shared/animals/mappings/species_wide_frames.s",
       "owner": "objects/shared/animals",
       "responsibility": "Assembler data for General/Sprites/Animals/Map - Animals 3",
       "role": "data",
@@ -31692,7 +31818,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_4.s",
+      "path": "src/objects/shared/animals/mappings/low_hop_frames.s",
       "owner": "objects/shared/animals",
       "responsibility": "Assembler data for General/Sprites/Animals/Map - Animals 4",
       "role": "data",
@@ -31743,7 +31869,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_5.s",
+      "path": "src/objects/shared/animals/mappings/tall_hop_frames.s",
       "owner": "objects/shared/animals",
       "responsibility": "Assembler data for General/Sprites/Animals/Map - Animals 5",
       "role": "data",
@@ -42987,7 +43113,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/world/sk_pointers_1.s",
+      "path": "src/objects/shared/world/s3_object_pointers.s",
       "owner": "objects/shared/world",
       "responsibility": "Assembler data for Levels/Misc/Object pointers - SK Set 1",
       "role": "data",
@@ -43017,7 +43143,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/world/sk_pointers_2.s",
+      "path": "src/objects/shared/world/sk_object_pointers.s",
       "owner": "objects/shared/world",
       "responsibility": "Assembler data for Levels/Misc/Object pointers - SK Set 2",
       "role": "data",
@@ -43589,7 +43715,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/collapsing_platform_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/collapsing_platform_act2.s",
       "owner": "objects/shared/zones/aiz",
       "responsibility": "Assembler data for Levels/AIZ/Misc Object Data/Map - Collapsing Platform 2",
       "role": "data",
@@ -43669,7 +43795,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/cork_floor_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/cork_floor_act2.s",
       "owner": "objects/shared/zones/aiz",
       "responsibility": "Assembler data for Levels/AIZ/Misc Object Data/Map - Cork Floor 2",
       "role": "data",
@@ -43931,7 +44057,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/falling_log_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/falling_log_act2.s",
       "owner": "objects/shared/zones/aiz",
       "responsibility": "Assembler data for Levels/AIZ/Misc Object Data/Map - Falling Log 2",
       "role": "data",
@@ -44011,7 +44137,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/log_splash_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/log_splash_act2.s",
       "owner": "objects/shared/zones/aiz",
       "responsibility": "Assembler data for Levels/AIZ/Misc Object Data/Map - Falling Log Splash 2",
       "role": "data",
@@ -44532,7 +44658,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/rock_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/rock_act2.s",
       "owner": "objects/shared/zones/aiz",
       "responsibility": "Assembler data for Levels/AIZ/Misc Object Data/Map - Rock 2",
       "role": "data",
@@ -48862,7 +48988,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/hcz/mappings/water_splash_2.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_skimming_splash.s",
       "owner": "objects/shared/zones/hcz",
       "responsibility": "Assembler data for Levels/HCZ/Misc Object Data/Map - Water Splash 2",
       "role": "data",
@@ -49895,7 +50021,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "path": "src/objects/shared/zones/lbz/final_boss/mappings/tower_cannon.s",
       "owner": "objects/shared/zones/lbz",
       "responsibility": "Assembler data for Levels/LBZ/Misc Object Data/Map - Final Boss 1",
       "role": "data",
@@ -49935,7 +50061,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "path": "src/objects/shared/zones/lbz/final_boss/mappings/grabber_ship.s",
       "owner": "objects/shared/zones/lbz",
       "responsibility": "Assembler data for Levels/LBZ/Misc Object Data/Map - Final Boss 2",
       "role": "data",
@@ -51030,7 +51156,7 @@
       "range_kind": "canonical-normal-build"
     },
     {
-      "path": "src/objects/shared/zones/lrz/mappings/breakable_rock_2.s",
+      "path": "src/objects/shared/zones/lrz/mappings/breakable_rock_act2.s",
       "owner": "objects/shared/zones/lrz",
       "responsibility": "Assembler data for Levels/LRZ/Misc Object Data/Map - Breakable Rock 2",
       "role": "data",

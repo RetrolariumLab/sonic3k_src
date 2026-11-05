@@ -4037,7 +4037,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_1.s",
+      "path": "src/objects/shared/animals/mappings/compact_hop_frames.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4093,7 +4093,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_2.s",
+      "path": "src/objects/shared/animals/mappings/shared_wide_frames.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4149,7 +4149,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_3.s",
+      "path": "src/objects/shared/animals/mappings/species_wide_frames.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4205,7 +4205,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_4.s",
+      "path": "src/objects/shared/animals/mappings/low_hop_frames.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -4261,7 +4261,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/animals/mappings/set_5.s",
+      "path": "src/objects/shared/animals/mappings/tall_hop_frames.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k", "sk"],
@@ -80532,7 +80532,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/collapsing_platform_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/collapsing_platform_act2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -80632,7 +80632,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/cork_floor_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/cork_floor_act2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -81751,7 +81751,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/falling_log_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/falling_log_act2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -81850,7 +81850,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/log_splash_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/log_splash_act2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -84073,7 +84073,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/aiz/mappings/rock_2.s",
+      "path": "src/objects/shared/zones/aiz/mappings/rock_act2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -98394,7 +98394,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/hcz/mappings/water_splash_2.s",
+      "path": "src/objects/shared/zones/hcz/mappings/water_skimming_splash.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -102129,7 +102129,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "path": "src/objects/shared/zones/lbz/final_boss/mappings/tower_cannon.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -102750,7 +102750,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "path": "src/objects/shared/zones/lbz/final_boss/mappings/grabber_ship.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
@@ -105959,7 +105959,7 @@
       ]
     },
     {
-      "path": "src/objects/shared/zones/lrz/mappings/breakable_rock_2.s",
+      "path": "src/objects/shared/zones/lrz/mappings/breakable_rock_act2.s",
       "family": "map",
       "address_space": "cartridge-rom",
       "profiles": ["s3k", "sk"],

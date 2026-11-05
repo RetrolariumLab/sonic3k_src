@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_1/sk
+; Owner: objects/bosses/lbz/tower_cannon/sk
 ; Responsibility: Launch Base first final-boss battle controller, attack state and helper callbacks for Sonic or Tails
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------

@@ -31,6 +31,9 @@ semantic naming migration is recorded separately in the mandatory
 `config/reconstruction/label_renames.json`: it maps 1571 physical procedures and
 their references while preserving the emitted bytes and original namespace
 separation. Historical source paths and procedure boundaries remain traceable.
+The layout registry's `path_moves` entries bind original paths to current
+owners. The label audit resolves each original file through that mapping and
+reverses the corresponding `include` path updates before comparing statements.
 
 The completed semantic continuation also covers 35470 further inherited labels,
 partitioned by subsystem in `config/reconstruction/semantic_labels.json`. Every

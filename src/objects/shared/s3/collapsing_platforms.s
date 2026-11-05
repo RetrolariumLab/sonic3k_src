@@ -616,7 +616,7 @@ S3Collapse_ICZPlatformSignedSlopeHeights:
 Map_AIZCollapsingPlatform:
                 include "src/objects/shared/zones/aiz/mappings/collapsing_platform.s"
 Map_AIZCollapsingPlatform2:
-                include "src/objects/shared/zones/aiz/mappings/collapsing_platform_2.s"
+                include "src/objects/shared/zones/aiz/mappings/collapsing_platform_act2.s"
 Map_LBZCollapsingBridge:
                 include "src/objects/shared/zones/lbz/mappings/collapsing_bridge.s"
 Map_LBZCollapsingLedge:

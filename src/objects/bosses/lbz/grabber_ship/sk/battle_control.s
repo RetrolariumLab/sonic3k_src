@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_2/sk
+; Owner: objects/bosses/lbz/grabber_ship/sk
 ; Responsibility: Launch Base final boss battle controller, player capture or release, defeat and scene transition
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------

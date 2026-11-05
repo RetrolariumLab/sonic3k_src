@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_1/sk
+; Owner: objects/bosses/lbz/tower_cannon/sk
 ; Responsibility: Launch Base Knuckles final-boss variant, coordinated actors, motion and collision helpers
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------

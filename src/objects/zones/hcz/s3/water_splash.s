@@ -252,4 +252,4 @@ S3WaterSplash_JumpFromWaterAndHide:
 Map_HCZWaterSplash:
                 include "src/objects/shared/zones/hcz/mappings/water_splash.s"
 Map_HCZWaterSplash2:
-                include "src/objects/shared/zones/hcz/mappings/water_splash_2.s"
+                include "src/objects/shared/zones/hcz/mappings/water_skimming_splash.s"

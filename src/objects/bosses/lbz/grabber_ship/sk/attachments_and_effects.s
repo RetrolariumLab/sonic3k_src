@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_2/sk
+; Owner: objects/bosses/lbz/grabber_ship/sk
 ; Responsibility: Launch Base final boss attached actors, orbiting parts, capture children and defeat effects with private placement records
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------

@@ -308,44 +308,44 @@
       "sha256": "cc66c64602ada06dd382506c1dae7667fe97e5c2d601a267fcc40631f618198f"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
-      "sha256": "99d7f9a87208d205fc33a6b997cfff3b5a6c99c783b90c24c7b2bea07a4dd276"
+      "path": "src/objects/bosses/lbz/tower_cannon/s3/battle_and_attacks.s",
+      "sha256": "b7158c65f1e5b51e8e9b837ff81e0e18d1ac70e8ac2d560b42dc9071e7391f6c"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
-      "sha256": "340de9f11d875756b86db7e9070566509b3dace42d5ded4a63fc65214c7d1f55"
+      "path": "src/objects/bosses/lbz/tower_cannon/s3/object_catalog.s",
+      "sha256": "a57c4f9701554446ce1b86bfd50677f8d4e8ee4a7f91cab2d517174b6a26ec58"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
-      "sha256": "5002cea8063ee845c4dac6fc70ebf991fec611f3a043ab16efc42d191e5cf4be"
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/knuckles_battle.s",
+      "sha256": "6362e35152777c28258c6259e8adab031708eea45e82aece13d574ff8f073aa8"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
-      "sha256": "99b8e0e58a27d88ed8896930432732c5f22fe9a5bdfcf674bbfd7ec57954ca1c"
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/object_catalog.s",
+      "sha256": "6791d7ccc58783b137c24be90d0ce3ac9e72edd16ad6927e48a8c026c364e68b"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
-      "sha256": "2af88339767250ad92bcc0cb5b7eba4ef6509a2738834319bc0a4dca98783f70"
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/sonic_tails_battle.s",
+      "sha256": "46a9576d6661e637c0088cb660da8149d94d1eacdd095b8094316f3f90fcdc0e"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
-      "sha256": "e99d734ad4ae9fb510d4d349e065eb96d521121369579d29b2be74407a101266"
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/attachments_and_effects.s",
+      "sha256": "1402773e3f8ddd5701e95e8a097bbb0d90b2508e9c16837a4ef46907c2f165e1"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
-      "sha256": "b6336e73105c09a3b47f0610dcad5d936fc5f0b1f87f925598c1a19f3f18e220"
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/defeat_and_ending.s",
+      "sha256": "86be0ffbb0679546f9b66abcf219c7c92668eca906f76717e2015c65bc242ea8"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
-      "sha256": "5324035c77fc2207745c12e3ff683b37cd6126921651aa9691d9ece4c55c59e6"
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/ending_catalog.s",
+      "sha256": "78547c2cbfc3fa110ab8b83732d9e81ba3d7face5b40c09d43fe8c637817026d"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
-      "sha256": "bdbf6ef83b4b8c9a8dfd7d5c1c2f917b0eb8f74318d7b4535eeccc214206d9aa"
+      "path": "src/objects/bosses/lbz/grabber_ship/sk/attachments_and_effects.s",
+      "sha256": "cd3c8d404f274746e5f6e7bd76710c37acd1aa6fd2afca2724545387cebc5c5a"
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
-      "sha256": "b4c0964c1e84e54ecac2cb78fa333bf6914c56b161d3f73b73816d4a80e7a454"
+      "path": "src/objects/bosses/lbz/grabber_ship/sk/object_catalog.s",
+      "sha256": "a427a9b7b0bd7e777f5a2f7848a2dcb7839f900eb2a83050363a9e898a0f4fcc"
     },
     {
       "path": "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
@@ -1093,7 +1093,7 @@
     },
     {
       "path": "src/objects/shared/s3/collapsing_platforms.s",
-      "sha256": "6446f606f92f742f2345a091cbdc2a75cfc5041a04aa57da0e1375def68e4686"
+      "sha256": "4c92e3a6b9270a0a95fd48446a77bfca7da0093964cc9613d0b799f894dac824"
     },
     {
       "path": "src/objects/shared/sk/collapsing_platforms.s",
@@ -2493,7 +2493,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "path": "src/objects/bosses/lbz/tower_cannon/s3/object_catalog.s",
       "symbol": "LBZBoss1S3_SectionFlameAnim",
       "scope": "LBZBoss1S3_SectionFlameAnim",
       "first_line": 134,
@@ -2519,7 +2519,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/object_catalog.s",
       "symbol": "LBZBoss1SK_SectionFlameAnim",
       "scope": "LBZBoss1SK_SectionFlameAnim",
       "first_line": 163,
@@ -2551,7 +2551,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "path": "src/objects/bosses/lbz/tower_cannon/sk/sonic_tails_battle.s",
       "symbol": "LBZBoss1SK_FallingDebrisFrames",
       "scope": "LBZBoss1SK_FallingDebrisFrames",
       "first_line": 455,
@@ -2565,7 +2565,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/attachments_and_effects.s",
       "symbol": "LBZBoss2S3_FallingDebrisFrames",
       "scope": "LBZBoss2S3_FallingDebrisFrames",
       "first_line": 426,
@@ -2579,7 +2579,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/ending_catalog.s",
       "symbol": "LBZBoss2S3_ArmSegmentDefaultAnim",
       "scope": "LBZBoss2S3_ArmSegmentDefaultAnim",
       "first_line": 139,
@@ -2605,7 +2605,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "path": "src/objects/bosses/lbz/grabber_ship/s3/ending_catalog.s",
       "symbol": "LBZBoss2S3_EndingSonicExternalAnim",
       "scope": "LBZBoss2S3_EndingSonicExternalAnim",
       "first_line": 166,
@@ -2622,7 +2622,7 @@
       "stored_markers": []
     },
     {
-      "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "path": "src/objects/bosses/lbz/grabber_ship/sk/object_catalog.s",
       "symbol": "LBZBoss2SK_ArmSegmentDefaultAnim",
       "scope": "LBZBoss2SK_ArmSegmentDefaultAnim",
       "first_line": 97,

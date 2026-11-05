@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_1/s3
+; Owner: objects/bosses/lbz/tower_cannon/s3
 ; Responsibility: Launch Base first final boss object attributes, child records, animation and palette resources
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ObjDat_LBZFinalBoss1:

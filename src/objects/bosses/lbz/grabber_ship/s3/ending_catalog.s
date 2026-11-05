@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_2/s3
+; Owner: objects/bosses/lbz/grabber_ship/s3
 ; Responsibility: Launch Base second final boss and unused Robotnik attributes, child records, ending poses, palettes and fade catalogs
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 

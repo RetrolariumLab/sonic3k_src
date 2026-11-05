@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_2/s3
+; Owner: objects/bosses/lbz/grabber_ship/s3
 ; Responsibility: Launch Base second final boss initialization, battle state, player interaction and defeat control
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------

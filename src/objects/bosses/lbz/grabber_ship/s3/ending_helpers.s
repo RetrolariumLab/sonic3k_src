@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_2/s3
+; Owner: objects/bosses/lbz/grabber_ship/s3
 ; Responsibility: Launch Base final battle and ending motion, collision, art scaling and external player-sprite animation helpers
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 

@@ -1,4 +1,4 @@
-; Owner: objects/bosses/lbz/final_boss_1/s3
+; Owner: objects/bosses/lbz/tower_cannon/s3
 ; Responsibility: Launch Base first final boss motion, collision, hit response and child positioning helpers
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
