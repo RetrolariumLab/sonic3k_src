@@ -104,7 +104,9 @@ def roundtrip():
             if encoded != original:
                 raise ValueError("Zero-edit resource differs from its original bytes: " + name)
         if row["compression"] != "none":
-            plain = format_codecs.encode_plain(row, packet["model"], context=context)
+            plain = format_codecs.encode_plain(
+                row, packet["model"], context=context, original=format_codecs.decompress(row, original)
+            )
             format_codecs.compress(row, plain, original, force=True)
         results[name] = encoded
         report["artifacts"].append(

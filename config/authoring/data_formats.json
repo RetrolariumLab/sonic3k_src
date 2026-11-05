@@ -7645,7 +7645,7 @@
       "path": "Levels/AIZ/Ring Pos/1-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -7660,7 +7660,7 @@
       "path": "Levels/AIZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -7675,7 +7675,7 @@
       "path": "Levels/AIZ/Ring Pos/2-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -7690,7 +7690,7 @@
       "path": "Levels/AIZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -8037,7 +8037,7 @@
       "path": "Levels/ALZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -8309,7 +8309,7 @@
       "path": "Levels/BPZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -8521,7 +8521,7 @@
       "path": "Levels/CGZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9033,7 +9033,7 @@
       "path": "Levels/CNZ/Ring Pos/1-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9048,7 +9048,7 @@
       "path": "Levels/CNZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9063,7 +9063,7 @@
       "path": "Levels/CNZ/Ring Pos/2-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9078,7 +9078,7 @@
       "path": "Levels/CNZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9320,7 +9320,7 @@
       "path": "Levels/DDZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9335,7 +9335,7 @@
       "path": "Levels/DDZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9967,7 +9967,7 @@
       "path": "Levels/DEZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9982,7 +9982,7 @@
       "path": "Levels/DEZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -9997,7 +9997,7 @@
       "path": "Levels/DEZ/Ring Pos/3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -10329,7 +10329,7 @@
       "path": "Levels/DPZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -10541,7 +10541,7 @@
       "path": "Levels/EMZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -11218,7 +11218,7 @@
       "path": "Levels/FBZ/Ring Pos/1-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -11233,7 +11233,7 @@
       "path": "Levels/FBZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -11248,7 +11248,7 @@
       "path": "Levels/FBZ/Ring Pos/2-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -11263,7 +11263,7 @@
       "path": "Levels/FBZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -11490,7 +11490,7 @@
       "path": "Levels/Gumball/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -12396,7 +12396,7 @@
       "path": "Levels/HCZ/Ring Pos/1-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -12411,7 +12411,7 @@
       "path": "Levels/HCZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -12426,7 +12426,7 @@
       "path": "Levels/HCZ/Ring Pos/2-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -12441,7 +12441,7 @@
       "path": "Levels/HCZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -12848,7 +12848,7 @@
       "path": "Levels/HPZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -13497,7 +13497,7 @@
       "path": "Levels/ICZ/Ring Pos/1-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -13512,7 +13512,7 @@
       "path": "Levels/ICZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -13527,7 +13527,7 @@
       "path": "Levels/ICZ/Ring Pos/2-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -13542,7 +13542,7 @@
       "path": "Levels/ICZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -14373,7 +14373,7 @@
       "path": "Levels/LBZ/Ring Pos/1-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -14388,7 +14388,7 @@
       "path": "Levels/LBZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -14403,7 +14403,7 @@
       "path": "Levels/LBZ/Ring Pos/2-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -14418,7 +14418,7 @@
       "path": "Levels/LBZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -15343,7 +15343,7 @@
       "path": "Levels/LRZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -15358,7 +15358,7 @@
       "path": "Levels/LRZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -15373,7 +15373,7 @@
       "path": "Levels/LRZ/Ring Pos/3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -15992,7 +15992,7 @@
       "path": "Levels/MGZ/Ring Pos/1-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -16007,7 +16007,7 @@
       "path": "Levels/MGZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -16022,7 +16022,7 @@
       "path": "Levels/MGZ/Ring Pos/2-S3.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -16037,7 +16037,7 @@
       "path": "Levels/MGZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -16684,7 +16684,7 @@
       "path": "Levels/MHZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -16699,7 +16699,7 @@
       "path": "Levels/MHZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -17465,7 +17465,7 @@
       "path": "Levels/Pachinko/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "y" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -18037,7 +18037,7 @@
       "path": "Levels/SOZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -18052,7 +18052,7 @@
       "path": "Levels/SOZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -18671,7 +18671,7 @@
       "path": "Levels/SSZ/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -18686,7 +18686,7 @@
       "path": "Levels/SSZ/Ring Pos/2.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -18701,7 +18701,7 @@
       "path": "Levels/SSZ/Ring Pos/Ending.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",
@@ -19018,7 +19018,7 @@
       "path": "Levels/Slots/Ring Pos/1.bin",
       "codec": "rings",
       "compression": "none",
-      "parameters": {},
+      "parameters": { "axis": "x" },
       "round_trip": "exact",
       "capacity": {
         "policy": "preservation-fixed-footprint",

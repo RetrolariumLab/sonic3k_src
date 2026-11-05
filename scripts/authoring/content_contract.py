@@ -143,7 +143,8 @@ class ContentCatalog:
             raise ValueError("Content packet belongs to a different target profile or ABI")
         original = self._original(row["path"], original)
         context = self._context(row, target_profile, context)
-        if len(format_codecs.decompress(row, original)) != row["capacity"]["decoded_bytes"]:
+        original_plain = format_codecs.decompress(row, original)
+        if len(original_plain) != row["capacity"]["decoded_bytes"]:
             raise ValueError("Original decoded size differs from its consumer allocation")
         if (
             row["codec"] == "collision-indices"
@@ -151,7 +152,7 @@ class ContentCatalog:
             and target_profile in {"sk", "s3k"}
         ):
             collision.check_shape_references(packet["model"], shape_count=256)
-        plain = format_codecs.encode_plain(row, packet["model"], context=context)
+        plain = format_codecs.encode_plain(row, packet["model"], context=context, original=original_plain)
         if len(plain) != row["capacity"]["decoded_bytes"]:
             raise ValueError("Edited data exceeds or changes its fixed decoded footprint")
         # Verify model equivalence even for an unchanged compressed stream.

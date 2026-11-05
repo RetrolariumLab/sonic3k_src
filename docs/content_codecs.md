@@ -53,6 +53,13 @@ active cells only. Software-scaled art uses raster order, not VDP tile order.
 Perspective pointers have a 24-bit RAM base. Sine encoding regenerates the
 duplicated cosine lookahead.
 
+Object placement exports require nondecreasing X in both the S3K and retained
+legacy Sonic 2 ABIs. Ring contracts declare their streaming axis. The Pachinko
+consumer uses Y and its alternate status table; the other ring streams use X.
+Retail streams with descending pairs can be exported only when their entire
+encoded content matches the verified original allocation. Edited streams must
+satisfy their order contract before encoding or workspace writes complete.
+
 Blue Sphere distinguishes one-based menu LEVEL, packed STAGE and entry code.
 Progress changes the checksum. The original accepts some unused high code bits;
 encoding returns a canonical code. A header serial without a nonzero digit would
@@ -67,10 +74,12 @@ immutable allocation checks remain necessary before writes.
 
 ## Tests
 
-Make test discovers normal package tests under tests/authoring. Fixtures are
-synthetic. They cover field semantics, edits, malformed records, capacities and
-ABI mismatches. The complete original-resource and rebuilt-container commands
-are described below; synthetic tests never substitute for those commands.
+Make test discovers normal package tests under tests/authoring. Synthetic
+fixtures cover field semantics, edits, malformed records, capacities, streaming
+order and ABI mismatches. When private inputs are available, integration cases
+also exercise real AIZ exports through ContentCatalog.encode and write. These
+cases skip explicitly when inputs are absent. The complete original-resource and
+rebuilt-container commands are described below.
 
 ## Immutable write allocations
 

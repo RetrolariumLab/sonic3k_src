@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 176
+    "commit_count": 177
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1103,9 +1103,15 @@
       "commits": ["b5beaefc6eb353f043e8a8c7c72359de491a80e0"]
     },
     {
-      "id": "current-shorten-review-b5beaefc",
+      "id": "change-86426014803c",
       "kind": "source_or_tooling",
       "summary": "Synchronize renamed memory phases with their source contracts.",
+      "commits": ["86426014803c9dae627c5cd9c680c42ecfd25c3b"]
+    },
+    {
+      "id": "current-shorten-review-86426014",
+      "kind": "source_or_tooling",
+      "summary": "Enforce placement streaming order at the content export boundary.",
       "commits": ["release-commit"]
     }
   ],

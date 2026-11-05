@@ -35,7 +35,7 @@ SPECS = {
     "palette": (graphics.decode_palette, graphics.encode_palette, {}),
     "blocks": (terrain.decode_blocks, terrain.encode_blocks, {}),
     "chunks": (terrain.decode_chunks, terrain.encode_chunks, {}),
-    "rings": (rings.decode, rings.encode, {}),
+    "rings": (rings.decode, rings.encode, {"axis": "axis"}),
     "objects": (object_placements.decode, object_placements.encode, {}),
     "legacy-s2-objects": (legacy_s2_objects.decode, legacy_s2_objects.encode, {}),
     "level-layout": (level_layout.decode, level_layout.encode, {}),
@@ -105,14 +105,22 @@ def decode_plain(row, data, *, context=None):
     raise ValueError("Source inputs and SMPS corpora require their dedicated ownership API")
 
 
-def encode_plain(row, model, *, context=None):
+def encode_plain(row, model, *, context=None, original=None):
     validate_spec(row)
     codec, parameters = row["codec"], row["parameters"]
     if codec == "chunks":
         terrain.check_chunk_references(model, block_count=768)
     if codec in SPECS:
         encoder, names = SPECS[codec][1], SPECS[codec][2]
-        return encoder(model, **{names[key]: value for key, value in parameters.items()})
+        encoded = encoder(model, **{names[key]: value for key, value in parameters.items()})
+        # Retail placements contain a few deliberate inversions. Preserve them
+        # only when the entire encoded stream matches the verified original.
+        if encoded != original:
+            if codec in {"objects", "legacy-s2-objects"}:
+                object_placements.check_order(model)
+            elif codec == "rings":
+                rings.check_order(model, parameters["axis"])
+        return encoded
     if codec == "rock-placement":
         geometry.check_rock_styles(model, parameters["style_count"])
         return geometry.encode_rocks(model)

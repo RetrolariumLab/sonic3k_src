@@ -8,7 +8,9 @@ def _capacity(value):
         raise ValueError("Ring capacity must be an integer between zero and 511")
 
 
-def decode(data, *, max_rings=511):
+def decode(data, *, max_rings=511, axis="x"):
+    if axis not in ("x", "y"):
+        raise ValueError("Unknown ring streaming axis")
     raw = _bytes(data)
     _capacity(max_rings)
     if len(raw) < 6 or len(raw) > 4 + max_rings * 4 + 4:
@@ -35,7 +37,9 @@ def decode(data, *, max_rings=511):
         offset += 4
 
 
-def encode(model, *, max_rings=511):
+def encode(model, *, max_rings=511, axis="x"):
+    if axis not in ("x", "y"):
+        raise ValueError("Unknown ring streaming axis")
     _capacity(max_rings)
     if set(model) != {"guard", "rings", "terminator"} or len(model["rings"]) > max_rings:
         raise ValueError("Ring layout fields or count differ from the format")
