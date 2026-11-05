@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 177
+    "commit_count": 178
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1109,9 +1109,15 @@
       "commits": ["86426014803c9dae627c5cd9c680c42ecfd25c3b"]
     },
     {
-      "id": "current-shorten-review-86426014",
+      "id": "change-fbe24b7bae66",
       "kind": "source_or_tooling",
       "summary": "Enforce placement streaming order at the content export boundary.",
+      "commits": ["fbe24b7bae661776b41b2162e90ba8802d10445a"]
+    },
+    {
+      "id": "current-shorten-review-fbe24b7b",
+      "kind": "source_or_tooling",
+      "summary": "Audit numeric address aliases and stack-pointer loads.",
       "commits": ["release-commit"]
     }
   ],
