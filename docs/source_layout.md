@@ -32,6 +32,12 @@ semantic naming migration is recorded separately in the mandatory
 their references while preserving the emitted bytes and original namespace
 separation. Historical source paths and procedure boundaries remain traceable.
 
+The completed semantic continuation also covers 35470 further inherited labels,
+partitioned by subsystem in `config/reconstruction/semantic_labels.json`. Every
+packet is applied. The checker preserves original physical declarations and
+requires reversible token edits, including subsequent short names and their
+explanatory comments. No new runtime coverage follows from naming alone.
+
 The final water-transition and enemy-art catalog sentinels share the addresses
 of the following demo-input and bubble-emitter entries. Their explicit
 `data-end-code-alias` contracts in the relocation policy retain the preservation

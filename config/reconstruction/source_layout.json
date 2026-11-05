@@ -4055,7 +4055,7 @@
       "range_kind": "canonical-normal-build",
       "size_exception": {
         "kind": "cohesive-family",
-        "reason": "The complete rotating slot player controller retains its linked movement, collision and cage programs with their shared helpers and lookup data below 900 physical lines.",
+        "reason": "The complete rotating slot player controller retains its linked movement, collision and cage programs with their shared helpers, lookup data and explanatory comments below 1000 physical lines.",
         "proof_target": "check-source-layout"
       },
       "rom_ranges": [

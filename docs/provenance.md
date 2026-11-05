@@ -74,8 +74,9 @@ The canonical
 1571 reviewed address-named procedures to source-derived meaningful names. Each
 record retains its original spelling, physical source identity, compilation
 profiles and concrete purpose. The three repeated spellings remain separate
-definitions in separate engines. Local labels and unrelated data labels retain
-their existing spellings.
+definitions in separate engines. That procedure-only stage left local labels and
+unrelated data labels unchanged; the continuation below owns their later
+migration.
 
 The registry is bound to the exact pre-migration Git source and must cover every
 original physical definition. Current declarations and references are checked
@@ -86,12 +87,13 @@ candidate build. Semantic naming does not claim new runtime coverage.
 
 The same canonical registry owns an
 [incremental semantic continuation](../config/reconstruction/semantic_labels.json)
-for 35470 further physical labels. Its subsystem partition is checked against
-the exact Git baseline; each applied subsystem must provide all of its reviewed
-mappings. Pending definitions retain their original names, and original physical
-identities remain stable when explanatory comments are inserted. This optional
-naming migration preserves the completed 1571-procedure record and does not
-change the original byte, address, scope or runtime acceptance requirements.
+for 35470 further physical labels. Every subsystem is applied, and the complete
+partition and reviewed mappings are checked against the exact Git baseline.
+Original physical identities remain stable when explanatory comments are
+inserted. The completed naming migration preserves the independent
+1571-procedure record and does not change the original byte, address, scope or
+runtime acceptance requirements. Later shortening retains these cataloged
+identities and puts necessary semantic details in source comments.
 
 Each subsystem also retains a frozen digest of its reviewed destination names.
 Applied shards record exact symbol edits by code-line and token ordinal, so

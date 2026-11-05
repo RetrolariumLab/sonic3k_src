@@ -24,9 +24,10 @@ records rationale and [known limits](unknowns.md) bounds the claims.
 
 Documentation is reviewed as one corpus: a review registry records a decision
 for every public Markdown document. `make check-docs` inventories sizes, links,
-reachability and repeated substantial paragraphs, checks required documents and
-writes current hashes. Automated checks supplement substantive review; file
-presence alone does not establish document quality.
+heading fragments, reachability and repeated substantial paragraphs, checks
+required documents and writes current hashes. Heading checks account for
+duplicate names and ignore fenced examples. Automated checks supplement
+substantive review; file presence alone does not establish document quality.
 
 The baseline passed the complete aggregate from a clean clone with verified
 private inputs. The manifest records that accepted commit and its source and

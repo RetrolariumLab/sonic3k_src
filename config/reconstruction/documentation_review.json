@@ -15,7 +15,7 @@
     {
       "path": "README.md",
       "decision": "reworked",
-      "reason": "Link the canonical contributor list, make fork identity explicit and distinguish current complete acceptance from the retained historical baseline."
+      "reason": "Match the Sonic 1 and Sonic 2 reader journey while retaining S3 regional profiles, separate sibling engines, exact lock-on composition, private inputs and complete gate boundaries."
     },
     {
       "path": "docs/architecture.md",
@@ -40,7 +40,7 @@
     {
       "path": "docs/content_codecs.md",
       "decision": "reworked",
-      "reason": "Require real bounded palette edits through actual five-profile ROM assembly, independently calculated exact differences and unchanged symbols, beyond zero-edit round trips."
+      "reason": "Describe streaming-order validation at the public export boundary, explicit ring axes and original inversions allowed only for a wholly unchanged stream, alongside actual-edit ROM proof."
     },
     {
       "path": "docs/data_formats.md",
@@ -69,13 +69,13 @@
     },
     {
       "path": "docs/numeric_operands.md",
-      "decision": "kept",
-      "reason": "Keep this cohesive subsystem reference; commands, constraints and evidence boundaries agree with current implementation."
+      "decision": "reworked",
+      "reason": "Document bounded constant-alias resolution, SP and word-address classification, and instruction/value-bound exceptions for preserved scalar and cartridge interfaces."
     },
     {
       "path": "docs/provenance.md",
       "decision": "reworked",
-      "reason": "Document frozen semantic destinations and reversible exact-token source views while retaining historical driver statements, physical scope and all preservation requirements."
+      "reason": "Record that every semantic packet is applied, retain physical and reversible token provenance, and explain later shortening with source comments."
     },
     {
       "path": "docs/raw_animations.md",
@@ -105,7 +105,7 @@
     {
       "path": "docs/source_layout.md",
       "decision": "reworked",
-      "reason": "Record reviewed physical/profile-scoped procedure renames while retaining historical provenance,byte preservation,ABI and runtime interpretation limits."
+      "reason": "Describe both completed semantic catalogs and their reversible physical scope while preserving all source ownership and runtime requirements."
     },
     {
       "path": "docs/source_reconstruction_1_0.md",
@@ -115,17 +115,17 @@
     {
       "path": "docs/source_reconstruction_2_0.md",
       "decision": "reworked",
-      "reason": "Require real bounded palette edits through actual five-profile ROM assembly, independently calculated exact differences and unchanged symbols, beyond zero-edit round trips."
+      "reason": "Include real local heading-fragment checks in the documented corpus audit and preserve exact committed-candidate acceptance requirements."
     },
     {
       "path": "docs/unknowns.md",
       "decision": "reworked",
-      "reason": "Record reviewed physical/profile-scoped procedure renames while retaining historical provenance,byte preservation,ABI and runtime interpretation limits."
+      "reason": "Reconcile completed 1571-procedure and 35470-label catalogs with remaining interpretation and finite runtime limits instead of claiming inherited anonymous declarations remain."
     },
     {
       "path": "docs/verification.md",
       "decision": "reworked",
-      "reason": "Distinguish the inactive preservation component from the validated active release candidate, retain exact completed pre/post-tag audits and current real-edit evidence."
+      "reason": "Include constant-alias and SP checks in the command inventory while retaining the distinction between historical baseline evidence and fresh aggregate acceptance."
     }
   ]
 }

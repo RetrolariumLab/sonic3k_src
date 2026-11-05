@@ -4,11 +4,13 @@ These limits apply to the accepted preservation profiles and the 2.0 baseline.
 They are not substitutes for missing release evidence. Aggregate acceptance is
 recorded by the commands in [verification](verification.md).
 
-- **Meaning of inherited labels.** All 1571 address-named `sub_*` procedures
-  have source-derived meanings and registered semantic names. Many `loc_*`,
-  `word_*` and `byte_*` labels still retain their inherited spellings. Procedure
-  naming does not establish every data label's meaning or prove runtime reach;
-  original input-domain quirks and unsupported cases remain preserved.
+- **Meaning of inherited labels.** All 1571 reviewed address-named procedures
+  and the 35470 further inherited labels have source-derived meanings and
+  registered semantic names. The completed catalogs retain physical definitions,
+  profiles and reversible token edits; no active declaration remains in the
+  reviewed anonymous naming families. These interpretations do not prove every
+  runtime path or input domain. Original quirks and unsupported cases remain
+  preserved; complete reverse engineering is not claimed.
 - **Runtime reach.** The 165-case short-attract matrix remains mandatory. Forty
   extended comparisons add longer attract, character, Competition, special-stage
   and own-cartridge SRAM reload routes on preservation and g0 images. Finite RAM

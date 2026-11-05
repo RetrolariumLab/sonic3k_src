@@ -13,7 +13,7 @@
 | `make verify-all`             | Cleanly assembled images compared with all five private reference images                          |
 | `make check-content-edits`    | Actual typed edits rebuilt into five ROMs, exact owned/checksum differences and unchanged symbols |
 | `make check-lockon`           | 675 exports against each independently assembled S3 regional symbol table                         |
-| `make check-numeric-operands` | Explicit numeric address forms and exact scalar exceptions                                        |
+| `make check-numeric-operands` | Numeric addresses, constant alias chains, SP loads and exact exceptions                           |
 | `make verify-emulator`        | Pinned executable prepared under ignored build storage                                            |
 | `make trace`                  | Direct preservation attract RAM comparison for every profile                                      |
 | `make audit-private`          | Reachable historical Git paths and index checked for private bytes and undeclared binaries        |

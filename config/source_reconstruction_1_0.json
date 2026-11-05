@@ -1383,9 +1383,15 @@
       "commits": ["aa120dd3f0aec7d8ffecb40a1df6d1e12b0dc2ba"]
     },
     {
-      "id": "current-shorten-review-aa120dd3",
+      "id": "change-282a0f616a9f",
       "kind": "source_or_tooling",
       "summary": "Reject broken Markdown fragments in the public documentation audit.",
+      "commits": ["282a0f616a9f3a7ed7f7d9090d0151e9852a1983"]
+    },
+    {
+      "id": "current-shorten-review-282a0f61",
+      "kind": "source_or_tooling",
+      "summary": "Align the project overview with sibling reconstructions and completed labels.",
       "commits": ["release-commit"]
     }
   ],
