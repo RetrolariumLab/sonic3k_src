@@ -1,4 +1,4 @@
-; Owner: objects/rings/s3
+; Owner: objects/rings/shared
 ; Responsibility: Visible ring sprite construction and its private ring mapping table
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
@@ -8,32 +8,32 @@ Render_Rings:
                 movea.l (Ring_start_addr_ROM).w,a0
                 move.l  (Ring_end_addr_ROM).w,d2
                 sub.l   a0,d2
-                beq.s   S3RingRender_LayoutReturn
+                beq.s   {RingLabelPrefix}LayoutReturn
                 movea.w (Ring_start_addr_RAM).w,a4
                 lea     CMap_Ring(pc),a1
                 move.w  4(a3),d4
                 move.w  #$F0,d5
                 move.w  (Screen_Y_wrap_value).w,d3
 
-S3RingRender_FilterLayoutEntry:
+                {RingLabelPrefix}FilterLayoutEntry:
                 tst.w   (a4)+
-                bmi.s   S3RingRender_NextLayoutEntry
+                bmi.s   {RingLabelPrefix}NextLayoutEntry
                 move.w  2(a0),d1
                 sub.w   d4,d1
                 addq.w  #8,d1
                 and.w   d3,d1
                 cmp.w   d5,d1
-                bhs.s   S3RingRender_NextLayoutEntry
+                bhs.s   {RingLabelPrefix}NextLayoutEntry
                 addi.w  #$78,d1
                 move.w  (a0),d0
                 sub.w   (a3),d0
                 addi.w  #$80,d0
                 move.b  -1(a4),d6
-                bne.s   S3RingRender_EmitLayoutSprite
+                bne.s   {RingLabelPrefix}EmitLayoutSprite
                 move.b  (Rings_frame).w,d6
 
-; Emit one eight-byte hardware entry. This path has no local sprite-budget guard
-S3RingRender_EmitLayoutSprite:
+; Emit one eight-byte hardware entry and decrement d7 without a local budget guard
+                {RingLabelPrefix}EmitLayoutSprite:
                 lsl.w   #3,d6
                 lea     (a1,d6.w),a2
                 add.w   (a2)+,d1
@@ -46,12 +46,12 @@ S3RingRender_EmitLayoutSprite:
                 move.w  d0,(a6)+
                 subq.w  #1,d7
 
-S3RingRender_NextLayoutEntry:
+                {RingLabelPrefix}NextLayoutEntry:
                 addq.w  #4,a0
                 subq.w  #4,d2
-                bne.s   S3RingRender_FilterLayoutEntry
+                bne.s   {RingLabelPrefix}FilterLayoutEntry
 
-S3RingRender_LayoutReturn:
+                {RingLabelPrefix}LayoutReturn:
                 rts
 ; End of function Render_Rings
 

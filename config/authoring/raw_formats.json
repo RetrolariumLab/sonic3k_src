@@ -988,12 +988,12 @@
       "sha256": "781fb0397c0d7d3b98606b29f42830a3e6a9f5c211ea4c637e58580780685fd8"
     },
     {
-      "path": "src/objects/runtime/s3/swing_motion.s",
-      "sha256": "43a278cf3c9bdfc8a0ab7917838f9ae86c70bc40294c62bfd02a63e423fecc82"
+      "path": "src/objects/runtime/shared/swing_motion.s",
+      "sha256": "812f09508c3c3ce8ec91498544fe715769f88eee05c70b37fee5472233b27882"
     },
     {
-      "path": "src/objects/runtime/s3/target_selection.s",
-      "sha256": "a25620412aa7d82f5bea972cd605f0f5857296379f417223a6f4c521204e9693"
+      "path": "src/objects/runtime/shared/target_selection.s",
+      "sha256": "21108aed82e2edc4f3411c349087a69600156d6283190db9b6841fb66c393bbf"
     },
     {
       "path": "src/objects/runtime/s3/display_helpers.s",
@@ -1062,14 +1062,6 @@
     {
       "path": "src/objects/runtime/sk/sprite_spawning.s",
       "sha256": "bbe569ea69bc33b6df2f98e9b1eed7302aca2b92909f437f6f6891dec76f4834"
-    },
-    {
-      "path": "src/objects/runtime/sk/swing_motion.s",
-      "sha256": "11e66cbf796c05c4d6cb38bab11431441ce8316de082b99e8318dda1bcc21b19"
-    },
-    {
-      "path": "src/objects/runtime/sk/target_selection.s",
-      "sha256": "ee6163ac506cbd17c5cbeda02fc886112cfda9a6a2b41aea9f45461d19d32521"
     },
     {
       "path": "src/objects/runtime/sk/display_helpers.s",

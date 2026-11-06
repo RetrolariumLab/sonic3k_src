@@ -166,6 +166,102 @@
           }
         }
       ]
+    },
+    {
+      "path": "src/objects/rings/shared/ring_rendering.s",
+      "parameter": "RingLabelPrefix",
+      "variants": [
+        {
+          "historical": "src/objects/rings/s3/ring_rendering.s",
+          "include_owner": "src/revisions/s3/engine_order.s",
+          "prefix": "S3RingRender_",
+          "profiles": ["s3-us", "s3-eu", "s3-jp"],
+          "origin": {
+            "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+            "path": "s3.s",
+            "first_line": 347,
+            "last_line": 459,
+            "sha256": "3519c9fb2e0e4ccb7da54f0ca1ac435e580d808e066e448c002064410c3a2a5b"
+          }
+        },
+        {
+          "historical": "src/objects/rings/sk/ring_rendering.s",
+          "include_owner": "src/revisions/sk/engine_order.s",
+          "prefix": "SKRingRender_",
+          "profiles": ["sk"],
+          "origin": {
+            "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
+            "path": "sonic3k.s",
+            "first_line": 459,
+            "last_line": 571,
+            "sha256": "3bb52a933b30092cc6256cb19748fa5528a370748a91d1366c1ced5e737bd4b0"
+          }
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/shared/swing_motion.s",
+      "parameter": "SwingLabelPrefix",
+      "variants": [
+        {
+          "historical": "src/objects/runtime/s3/swing_motion.s",
+          "include_owner": "src/revisions/s3/engine_order.s",
+          "prefix": "S3Swing_",
+          "profiles": ["s3-us", "s3-eu", "s3-jp"],
+          "origin": {
+            "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+            "path": "s3.s",
+            "first_line": 1690,
+            "last_line": 1776,
+            "sha256": "6e38a12ca97b1545276ffb8e73f6cecc80fa8a3df31dd79eee3bd4a7fa8639e5"
+          }
+        },
+        {
+          "historical": "src/objects/runtime/sk/swing_motion.s",
+          "include_owner": "src/revisions/sk/engine_order.s",
+          "prefix": "SKSwing_",
+          "profiles": ["sk"],
+          "origin": {
+            "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
+            "path": "sonic3k.s",
+            "first_line": 2380,
+            "last_line": 2466,
+            "sha256": "33bf857e9d46578610faac54d36806da330dbefccb84c65c0a41ccbd427797d2"
+          }
+        }
+      ]
+    },
+    {
+      "path": "src/objects/runtime/shared/target_selection.s",
+      "parameter": "TargetLabelPrefix",
+      "variants": [
+        {
+          "historical": "src/objects/runtime/s3/target_selection.s",
+          "include_owner": "src/revisions/s3/engine_order.s",
+          "prefix": "S3Find",
+          "profiles": ["s3-us", "s3-eu", "s3-jp"],
+          "origin": {
+            "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
+            "path": "s3.s",
+            "first_line": 2056,
+            "last_line": 2154,
+            "sha256": "5d7e4f44da7accf8c5068393f4ceccbe704877a5e4ea379202efb4eb4a52dd35"
+          }
+        },
+        {
+          "historical": "src/objects/runtime/sk/target_selection.s",
+          "include_owner": "src/revisions/sk/engine_order.s",
+          "prefix": "SKFind",
+          "profiles": ["sk"],
+          "origin": {
+            "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
+            "path": "sonic3k.s",
+            "first_line": 2759,
+            "last_line": 2857,
+            "sha256": "34ed9f8be53e1e758f080ad5a028d51aeb9761243f446989ec9d1b90accebcbc"
+          }
+        }
+      ]
     }
   ],
   "files": [
@@ -29794,8 +29890,8 @@
       ]
     },
     {
-      "path": "src/objects/rings/s3/ring_rendering.s",
-      "owner": "objects/rings/s3",
+      "path": "src/objects/rings/shared/ring_rendering.s",
+      "owner": "objects/rings/shared",
       "responsibility": "Visible ring sprite construction and its private ring mapping table.",
       "role": "code",
       "status": "owned",
@@ -29835,6 +29931,17 @@
           "component": "s3-us",
           "start": 2160662,
           "end": 2160830
+        },
+        {
+          "profile": "sk",
+          "start": 60294,
+          "end": 60462
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 60294,
+          "end": 60462
         }
       ]
     },
@@ -29910,41 +30017,6 @@
           "component": "sk",
           "start": 107802,
           "end": 109166
-        }
-      ]
-    },
-    {
-      "path": "src/objects/rings/sk/ring_rendering.s",
-      "owner": "objects/rings/sk",
-      "responsibility": "Visible ring sprite construction and its private ring mapping table.",
-      "role": "code",
-      "status": "owned",
-      "physical_lines": 116,
-      "origin": {
-        "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
-        "path": "sonic3k.s",
-        "first_line": 459,
-        "last_line": 571,
-        "sha256": "3bb52a933b30092cc6256cb19748fa5528a370748a91d1366c1ced5e737bd4b0"
-      },
-      "applicability": "emitted",
-      "range_kind": "canonical-normal-build",
-      "size_exception": {
-        "kind": "cohesive-subsystem",
-        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
-        "proof_target": "verify-all"
-      },
-      "rom_ranges": [
-        {
-          "profile": "sk",
-          "start": 60294,
-          "end": 60462
-        },
-        {
-          "profile": "s3k",
-          "component": "sk",
-          "start": 60294,
-          "end": 60462
         }
       ]
     },
@@ -30490,8 +30562,8 @@
       ]
     },
     {
-      "path": "src/objects/runtime/s3/swing_motion.s",
-      "owner": "objects/runtime/s3",
+      "path": "src/objects/runtime/shared/swing_motion.s",
+      "owner": "objects/runtime/shared",
       "responsibility": "Vertical and horizontal oscillation and counted swing motion helpers.",
       "role": "code",
       "status": "owned",
@@ -30531,12 +30603,23 @@
           "component": "s3-us",
           "start": 2436964,
           "end": 2437128
+        },
+        {
+          "profile": "sk",
+          "start": 542694,
+          "end": 542858
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 542694,
+          "end": 542858
         }
       ]
     },
     {
-      "path": "src/objects/runtime/s3/target_selection.s",
-      "owner": "objects/runtime/s3",
+      "path": "src/objects/runtime/shared/target_selection.s",
+      "owner": "objects/runtime/shared",
       "responsibility": "Nearest player or other-object selection and facing from position, velocity or parent flags.",
       "role": "code",
       "status": "owned",
@@ -30576,6 +30659,17 @@
           "component": "s3-us",
           "start": 2437738,
           "end": 2437906
+        },
+        {
+          "profile": "sk",
+          "start": 543512,
+          "end": 543680
+        },
+        {
+          "profile": "s3k",
+          "component": "sk",
+          "start": 543512,
+          "end": 543680
         }
       ]
     },
@@ -31216,76 +31310,6 @@
           "component": "sk",
           "start": 112272,
           "end": 113760
-        }
-      ]
-    },
-    {
-      "path": "src/objects/runtime/sk/swing_motion.s",
-      "owner": "objects/runtime/sk",
-      "responsibility": "Vertical or horizontal oscillation and counted swing motion helpers.",
-      "role": "code",
-      "status": "owned",
-      "physical_lines": 93,
-      "origin": {
-        "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
-        "path": "sonic3k.s",
-        "first_line": 2380,
-        "last_line": 2466,
-        "sha256": "33bf857e9d46578610faac54d36806da330dbefccb84c65c0a41ccbd427797d2"
-      },
-      "applicability": "emitted",
-      "range_kind": "canonical-normal-build",
-      "size_exception": {
-        "kind": "cohesive-subsystem",
-        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
-        "proof_target": "verify-all"
-      },
-      "rom_ranges": [
-        {
-          "profile": "sk",
-          "start": 542694,
-          "end": 542858
-        },
-        {
-          "profile": "s3k",
-          "component": "sk",
-          "start": 542694,
-          "end": 542858
-        }
-      ]
-    },
-    {
-      "path": "src/objects/runtime/sk/target_selection.s",
-      "owner": "objects/runtime/sk",
-      "responsibility": "Nearest player or other-object selection and facing from position, velocity or parent flags.",
-      "role": "code",
-      "status": "owned",
-      "physical_lines": 104,
-      "origin": {
-        "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
-        "path": "sonic3k.s",
-        "first_line": 2759,
-        "last_line": 2857,
-        "sha256": "34ed9f8be53e1e758f080ad5a028d51aeb9761243f446989ec9d1b90accebcbc"
-      },
-      "applicability": "emitted",
-      "range_kind": "canonical-normal-build",
-      "size_exception": {
-        "kind": "cohesive-subsystem",
-        "reason": "A complete named subsystem retains its state, data and helper routines without padding or unrelated code.",
-        "proof_target": "verify-all"
-      },
-      "rom_ranges": [
-        {
-          "profile": "sk",
-          "start": 543512,
-          "end": 543680
-        },
-        {
-          "profile": "s3k",
-          "component": "sk",
-          "start": 543512,
-          "end": 543680
         }
       ]
     },
@@ -70584,7 +70608,7 @@
       "role": "composition",
       "status": "owned",
       "address_space": "cartridge-rom",
-      "physical_lines": 445,
+      "physical_lines": 448,
       "origin": {
         "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
         "path": "s3.s",
@@ -70745,7 +70769,7 @@
       "role": "composition",
       "status": "owned",
       "address_space": "cartridge-rom",
-      "physical_lines": 745,
+      "physical_lines": 748,
       "origin": {
         "commit": "7662a8b7f55ace09326add7897ae8b3db36c3f5d",
         "path": "sonic3k.s",

@@ -5,12 +5,12 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-The registry has 1978 owned units: 886 data owners, 1042 executable owners, 4
+The registry has 1975 owned units: 886 data owners, 1039 executable owners, 4
 definition libraries, 10 checked memory modules, 20 structural composition
 modules and 16 typed Z80 driver owners. No source unit remains pending. The
-shared child initialization module represents two historical executable owners.
-Source-layout acceptance also requires the built range, historical ABI and
-physical object coverage checks.
+shared executable modules each represent two historical owners. Source-layout
+acceptance also requires the built range, historical ABI and physical object
+coverage checks.
 
 Every owned cartridge unit has independently checked normal-build ROM ranges,
 including the applicable component and offset in the lock-on image. After an
