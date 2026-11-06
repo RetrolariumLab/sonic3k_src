@@ -1,7 +1,8 @@
 """Build and independently verify the complete bounded relocation matrix."""
 
 import argparse
-from collections import Counter
+from collections import Counter, defaultdict
+import heapq
 import hashlib
 import json
 from pathlib import Path
@@ -24,6 +25,7 @@ from scripts.build.source_inputs import stage as stage_inputs
 from scripts.validation.cohorts import collect_file, render, table_slot
 from scripts.validation.lockon import check_fixed
 from scripts.validation.symbols import parse_symbols
+from scripts.validation.source_sharing import shared_sources
 
 DEST = ROOT / "build/relocated"
 
@@ -41,32 +43,71 @@ def canonical_documents(documents, engines):
     by_path = {row["path"]: row for row in documents}
     if len(by_path) != len(documents):
         raise ValueError("Duplicate discovered relocation source")
-    order, rank = [], {}
+    rank, following, incoming = {}, defaultdict(set), Counter()
     for engine in engines.values():
-        previous = -1
-        for name in engine["sources"]:
+        names = engine["sources"]
+        if len(names) != len(set(names)):
+            raise ValueError("Duplicated canonical engine source")
+        for name in names:
             if name not in by_path:
                 raise ValueError("Engine order names an undiscovered code source")
-            if name not in rank:
-                rank[name] = len(order)
-                order.append(name)
-            if rank[name] <= previous:
-                raise ValueError("Conflicting or duplicated canonical engine source order")
-            previous = rank[name]
-    if set(order) != set(by_path):
+            rank.setdefault(name, len(rank))
+        for previous, name in zip(names, names[1:]):
+            if name not in following[previous]:
+                following[previous].add(name)
+                incoming[name] += 1
+    if rank.keys() != by_path.keys():
         raise ValueError("Discovered code source has no canonical engine owner")
-    return [by_path[name] for name in order]
+    ready = [(rank[name], name) for name in rank if not incoming[name]]
+    heapq.heapify(ready)
+    order = []
+    while ready:
+        _, name = heapq.heappop(ready)
+        order.append(by_path[name])
+        for child in following[name]:
+            incoming[child] -= 1
+            if not incoming[child]:
+                heapq.heappush(ready, (rank[child], child))
+    if len(order) != len(by_path):
+        raise ValueError("Conflicting canonical engine source order")
+    return order
+
+
+def shared_document(path, text, views):
+    shape, labels = None, {}
+    for view in views:
+        document = collect_file(path, view.expand(text))
+        code_labels = document.pop("code_labels")
+        if shape is not None and shape != document:
+            raise ValueError("Shared source differs in physical relocation cohorts: " + path)
+        shape = document
+        for profile in view.profiles:
+            labels[profile] = code_labels
+    return {**shape, "profile_labels": labels}
+
+
+def code_labels(document, profile):
+    if "profile_labels" in document:
+        return document["profile_labels"][profile]
+    return document["code_labels"]
 
 
 def derive(policy):
     names = source_names()
+    shared = defaultdict(list)
+    for view in shared_sources(ROOT):
+        shared[view.path].append(view)
+    for path, views in shared.items():
+        actual = {profile for profile, engine in policy["engines"].items() if path in engine["sources"]}
+        if actual != {profile for view in views for profile in view.profiles}:
+            raise ValueError("Shared relocation source differs from its profile scope: " + path)
     # Discover all returns independently of the configured list. New executable
     # source cannot silently disappear from the probe when modules are split.
     discovered = []
     for name in names:
         text = (ROOT / name).read_text(encoding="utf-8")
         if re.search(r"\b(?:rts|rte)\b|; End of function", text, re.I):
-            data = collect_file(name, text)
+            data = shared_document(name, text, shared[name]) if name in shared else collect_file(name, text)
             if data["returns"] or data["procedures"]:
                 discovered.append(data)
     if {d["path"] for d in discovered} != set(policy["code_sources"]):
@@ -118,6 +159,9 @@ def rendered_fingerprint(policy, plan, group, names, widenings):
         for key, engine in policy["engines"].items()
     }
     chosen = selected(plan, group)
+    shared = {doc["path"] for doc in plan.get("documents", ()) if "profile_labels" in doc}
+    if any(w["path"] in shared for w in widenings):
+        raise ValueError("Shared relocation source requires unchanged instruction widths")
     digestor = hashlib.sha256()
     for name in sorted(
         set(names)
@@ -204,7 +248,11 @@ def baseline(policy, plan):
         symbols = parse_symbols(
             (ROOT / "build/objects" / key / "main.lst").read_text(encoding="utf-8", errors="replace")
         )
-        declared = {n for p in engine["sources"] for n in documents[p]["code_labels"]}
+        declared = {n for p in engine["sources"] for n in code_labels(documents[p], key)}
+        for path in engine["sources"]:
+            document = documents[path]
+            if "profile_labels" in document and set(code_labels(document, key)) - symbols.keys():
+                raise ValueError("Shared relocation code labels are absent from AS: " + path)
         declared.update(checked_code_aliases(policy, key, symbols, declared))
         entries = {n: symbols[n] for n in sorted(declared) if n in symbols and 0x200 <= symbols[n] < 0x200000}
         if not entries or engine["startup_label"] not in entries:
@@ -253,6 +301,7 @@ def prepare_source(policy, plan, group, names):
 
 def widen_failures(work, folder, policy):
     changes = []
+    shared = {view.path for view in shared_sources(ROOT)}
     for key in policy["engines"]:
         log = folder / "objects" / key / "assembler.log"
         if not log.is_file():
@@ -264,6 +313,8 @@ def widen_failures(work, folder, policy):
         if any(code != "1370" for _, _, code in errors):
             raise ValueError("Relocation has a non-range assembler failure: " + str(log))
         for name, number, _ in errors:
+            if name.strip() in shared:
+                raise ValueError("Shared relocation source requires unchanged instruction widths")
             path = inside(name.strip(), work)
             lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
             index = int(number) - 1

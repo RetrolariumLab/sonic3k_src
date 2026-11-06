@@ -234,8 +234,20 @@ def main(argv=None):
     args = parser.parse_args(argv)
     sources = source_names()
     texts = {path: (ROOT / path).read_text(encoding="utf-8") for path in sources}
-    aliases = merge_constants(*(constant_definitions(text) for text in texts.values()))
-    rows = [row for path, text in texts.items() for row in candidates(path, text, aliases=aliases)]
+    from scripts.validation.source_sharing import shared_sources
+
+    variants = shared_sources(ROOT)
+    views = {}
+    for path, text in texts.items():
+        expanded = [view.expand(text) for view in variants if view.path == path]
+        views[path] = expanded or [text]
+    aliases = merge_constants(*(constant_definitions(text) for expanded in views.values() for text in expanded))
+    rows = []
+    for path, expanded in views.items():
+        findings = [list(candidates(path, text, aliases=aliases)) for text in expanded]
+        if any(items != findings[0] for items in findings[1:]):
+            raise ValueError("Numeric operand findings differ across shared source views: " + path)
+        rows.extend(findings[0])
     atomic(
         ROOT / "build/audits/numeric_operands.json",
         (json.dumps({"sources": len(sources), "candidates": rows}, indent=2) + "\n").encode(),

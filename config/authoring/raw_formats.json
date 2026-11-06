@@ -952,8 +952,8 @@
       "sha256": "75de3ee6b33c309e894ff1fb56e5cd0b0a4cec74e4c72e5d45ceb47edffa5cf1"
     },
     {
-      "path": "src/objects/runtime/s3/child_initialization.s",
-      "sha256": "bf742e98610b5cd507ef49c8436dbfae17ce0a002baf2c01aeceb2368b213e64"
+      "path": "src/objects/runtime/shared/child_initialization.s",
+      "sha256": "91b55bffde01cd110f37aea50925d7319b30f359571eb0cb753ec3e3e6ba691d"
     },
     {
       "path": "src/objects/runtime/s3/curved_motion.s",
@@ -1022,10 +1022,6 @@
     {
       "path": "src/objects/runtime/sk/child_drawing.s",
       "sha256": "e45435acb1a57594592a972c822ab7c71296682070b10da095639aeefc339e61"
-    },
-    {
-      "path": "src/objects/runtime/sk/child_initialization.s",
-      "sha256": "c91c1b1eb2ee0d12ff12a53668cc051c606e85b917afbe4aca63932f93b8048c"
     },
     {
       "path": "src/objects/runtime/sk/curved_motion.s",

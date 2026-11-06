@@ -10,6 +10,7 @@ from scripts.build.project import ROOT
 from scripts.validation.documentation import document_inventory, tracked
 from scripts.validation.label_renames import validate_registry
 from scripts.validation.release_tags import check_tag, read_tag
+from scripts.validation.source_sharing import shared_sources
 
 MANIFEST = "config/source_reconstruction_2_0.json"
 REQUIREMENTS = frozenset(
@@ -213,10 +214,12 @@ def metadata(root=ROOT):
         if not (root / name).is_file():
             raise ValueError("Missing provenance reference")
     layout = read(root, manifest["semantic_source"]["manifest"])
+    variants = shared_sources(root, layout)
+    historical_owners = len(layout["files"]) + len(variants) - len({view.path for view in variants})
     if (
         layout.get("state") != "complete"
         or any(row.get("status") != "owned" for row in layout["files"])
-        or len(layout["files"]) != manifest["semantic_source"]["owned_units"]
+        or historical_owners != manifest["semantic_source"]["owned_units"]
         or manifest["semantic_source"].get("pending_units") != 0
     ):
         raise ValueError("Incomplete source ownership")

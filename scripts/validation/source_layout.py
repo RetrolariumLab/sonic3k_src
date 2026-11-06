@@ -12,6 +12,7 @@ from scripts.validation.definitions import check_definitions, check_nonemitting_
 from scripts.validation.data_macros import DATA_MACROS, HEADER as MACRO_HEADER, check_data_macros
 from scripts.validation import memory_layout, composition_sources, z80_driver
 from scripts.validation.source_names import check_source_names
+from scripts.validation.source_sharing import project_includes, shared_sources
 from scripts.validation.documentation import tracked
 
 DATA_OPS = (
@@ -163,7 +164,7 @@ def check_added_annotations(row, text, source_includes=(), binary_includes=()):
         check_ledger("".join(lines[instructions[-1]["line"] : ends[0] - 1]), source_includes, binary_includes)
 
 
-def validate_entry(row, text, inventory=False, source_includes=(), binary_includes=(), source_owners=None):
+def validate_entry(row, text, inventory=False, source_includes=(), binary_includes=(), source_owners=None, variants=()):
     lines = len(text.splitlines())
     if not row.get("owner") or not row.get("responsibility") or row.get("physical_lines") != lines:
         raise ValueError("Missing ownership or stale physical line count: " + row["path"])
@@ -190,7 +191,9 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
         expected_space = "assembly-order" if contract.get("kind") == "entry" else "cartridge-rom"
         if row.get("address_space") != expected_space or source_owners is None:
             raise ValueError("Structural source needs its checked composition domain")
-        composition_sources.check(text, contract, source_owners, binary_includes)
+        composition_sources.check(
+            project_includes(row["path"], text, variants), contract, source_owners, binary_includes
+        )
     elif row["role"] == "memory":
         if row.get("address_space") != "declarations":
             raise ValueError("Memory ownership needs its non-emitting declaration domain")
@@ -222,9 +225,11 @@ def validate_entry(row, text, inventory=False, source_includes=(), binary_includ
     ):
         raise ValueError("Tiny executable module needs a structural contract")
     if row["role"] == "code":
-        document = collect_file(row["path"], text)
-        if not document["returns"] and not document["procedures"]:
-            raise ValueError("Executable ownership needs a real return or terminal procedure")
+        views = [view.expand(text) for view in variants if view.path == row["path"]]
+        for source in views or [text]:
+            document = collect_file(row["path"], source)
+            if not document["returns"] and not document["procedures"]:
+                raise ValueError("Executable ownership needs a real return or terminal procedure")
     return True
 
 
@@ -302,6 +307,7 @@ def check_ranges(rows):
 def check(inventory=False, built=False):
     registry = load("config/reconstruction/source_layout.json")
     rows = registry["files"]
+    variants = shared_sources(ROOT, registry)
     check_source_names(rows, tracked(ROOT))
     paths = [r["path"] for r in rows]
     if len(paths) != len(set(paths)) or set(paths) != set(source_names()):
@@ -328,10 +334,12 @@ def check(inventory=False, built=False):
     accepted = 0
     for row in rows:
         text = texts[row["path"]]
-        accepted += validate_entry(row, text, inventory, source_includes, binary_includes, source_owners=owners)
+        accepted += validate_entry(
+            row, text, inventory, source_includes, binary_includes, source_owners=owners, variants=variants
+        )
         if row["role"] == "composition":
             structural[row["path"]] = composition_sources.check(
-                text, row["composition_contract"], owners, binary_includes
+                project_includes(row["path"], text, variants), row["composition_contract"], owners, binary_includes
             )
         if row["path"] in source_includes:
             dependencies[row["path"]] = check_ledger(text, source_includes, binary_includes)

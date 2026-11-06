@@ -13,6 +13,7 @@ import tarfile
 from scripts.build.project import ROOT
 from scripts.validation.numeric_operands import code_part
 from scripts.validation.semantic_label_edits import apply_edits, code_fingerprint, code_lines
+from scripts.validation.source_sharing import project_includes, shared_sources
 
 INDEX = "config/reconstruction/semantic_labels.json"
 SHARDS = "config/reconstruction/semantic_labels"
@@ -135,7 +136,7 @@ def historical_source(root, revision):
     return sources, targets
 
 
-def _legacy_edits(originals, previous, current, policy, historical_paths):
+def _legacy_edits(originals, previous, current, policy, historical_paths, variants):
     """Project a change in a legacy destination onto the immutable source tokens."""
 
     def identities(rows):
@@ -148,10 +149,11 @@ def _legacy_edits(originals, previous, current, policy, historical_paths):
     changed = {key for key in before if before[key]["new"] != after[key]["new"]}
     if not changed:
         return {}, {}
+    shared = {(view.path, profile): view.historical for view in variants for profile in view.profiles}
     engine_files = defaultdict(set)
     for profile, engine in policy["engines"].items():
         for path in engine["sources"]:
-            engine_files[historical_paths.get(path, path)].add(profile)
+            engine_files[shared.get((path, profile), historical_paths.get(path, path))].add(profile)
     by_name = defaultdict(list)
     definitions = defaultdict(dict)
     for key, row in before.items():
@@ -211,6 +213,14 @@ def validate(root=ROOT, index=None):
     if not moves.keys() <= sources.keys() or sources.keys() & moves.values():
         raise ValueError("Source path moves differ from the historical ownership scope")
     historical_paths = {current: old for old, current in moves.items()}
+    variants = shared_sources(root)
+    shared = {view.historical: view for view in variants}
+    if (
+        not shared.keys() <= sources.keys()
+        or shared.keys() & moves.keys()
+        or any(view.path in sources or view.path in historical_paths for view in variants)
+    ):
+        raise ValueError("Shared sources differ from the historical ownership scope")
     if (
         type(value.get("target_count")) is not int
         or value["target_count"] != len(targets)
@@ -380,7 +390,12 @@ def validate(root=ROOT, index=None):
         )
         current_registry = read(root, REGISTRY)
         legacy_views, legacy_definitions = _legacy_edits(
-            originals, earlier_registry["renames"], current_registry["renames"], read(root, POLICY), historical_paths
+            originals,
+            earlier_registry["renames"],
+            current_registry["renames"],
+            read(root, POLICY),
+            historical_paths,
+            variants,
         )
         for path, edits in legacy_views.items():
             if any((path, row["code_line"], row["token"]) in edited_coordinates for row in edits):
@@ -393,6 +408,7 @@ def validate(root=ROOT, index=None):
         "index": value,
         "source_views": dict(views),
         "historical_paths": historical_paths,
+        "shared_sources": variants,
         "target_count": len(targets),
         "applied_targets": applied_count,
     }
@@ -402,10 +418,16 @@ def validate(root=ROOT, index=None):
     records = []
     candidates = defaultdict(set)
     for path, original in sources.items():
-        source = (root / moves.get(path, path)).resolve()
+        view = shared.get(path)
+        source = (root / (view.path if view else moves.get(path, path))).resolve()
         if not source.is_relative_to(root) or not source.is_file():
             raise ValueError("Missing or escaping semantic source: " + path)
         text = source.read_text(encoding="utf-8")
+        if view:
+            if profiles.get(path) != sorted(view.profiles):
+                raise ValueError("Shared source differs from historical compilation profiles: " + path)
+            text = view.expand(text)
+        text = project_includes(path, text, variants, historical=True)
         current = declarations(text)
         if len(current) != len(original):
             raise ValueError("Semantic migration added or removed declarations: " + path)

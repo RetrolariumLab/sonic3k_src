@@ -1,4 +1,4 @@
-; Owner: objects/runtime/s3
+; Owner: objects/runtime/shared
 ; Responsibility: Child sprite priority propagation and fixed-size word record copying
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
@@ -8,10 +8,10 @@ Child_GetPriority:
                 movea.w parent3(a0),a1
                 bclr    #7,art_tile(a0)
                 btst    #7,art_tile(a1)
-                beq.s   S3Child_CopyParentDrawPriority
+                beq.s   {ChildLabelPrefix}CopyParentDrawPriority
                 bset    #7,art_tile(a0)
 
-S3Child_CopyParentDrawPriority:
+                {ChildLabelPrefix}CopyParentDrawPriority:
                 move.w  priority(a1),priority(a0)
                 rts
 ; End of function Child_GetPriority
@@ -21,11 +21,11 @@ S3Child_CopyParentDrawPriority:
 Child_GetPriorityOnce:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
-                beq.s   S3Child_GetPriorityOnceReturn
+                beq.s   {ChildLabelPrefix}GetPriorityOnceReturn
                 bset    #7,art_tile(a0)
                 move.l  (sp),(a0)
 
-S3Child_GetPriorityOnceReturn:
+                {ChildLabelPrefix}GetPriorityOnceReturn:
                 rts
 ; End of function Child_GetPriorityOnce
 

@@ -5,11 +5,12 @@ responsibility, physical line count and source range at the preservation
 baseline. Owned data lives under `src/objects`, `src/rendering`, `src/ui`,
 `src/game` and `src/system/debug`. Engine-specific code remains separate.
 
-The registry has 1979 owned units: 886 data owners, 1043 sibling executable
-owners, 4 definition libraries, 10 checked memory modules, 20 structural
-composition modules and 16 typed Z80 driver owners. No source unit remains
-pending. Source-layout acceptance also requires the built range, historical ABI
-and physical object coverage checks.
+The registry has 1978 owned units: 886 data owners, 1042 executable owners, 4
+definition libraries, 10 checked memory modules, 20 structural composition
+modules and 16 typed Z80 driver owners. No source unit remains pending. The
+shared child initialization module represents two historical executable owners.
+Source-layout acceptance also requires the built range, historical ABI and
+physical object coverage checks.
 
 Every owned cartridge unit has independently checked normal-build ROM ranges,
 including the applicable component and offset in the lock-on image. After an
@@ -34,6 +35,12 @@ separation. Historical source paths and procedure boundaries remain traceable.
 The layout registry's `path_moves` entries bind original paths to current
 owners. The label audit resolves each original file through that mapping and
 reverses the corresponding `include` path updates before comparing statements.
+Shared executable owners have a separate `shared_sources` contract. Each variant
+records its historical path, provenance, compilation profiles and the literal
+label prefix passed immediately before the include. The audit expands the prefix
+and restores the include path for each historical view. Relocation checks the
+physical cohort boundaries in every view and uses the resolved code labels when
+reading the corresponding AS listing.
 
 The completed semantic continuation also covers 35470 further inherited labels,
 partitioned by subsystem in `config/reconstruction/semantic_labels.json`. Every

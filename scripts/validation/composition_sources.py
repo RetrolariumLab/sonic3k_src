@@ -9,6 +9,7 @@ from scripts.build.project import ROOT, atomic, load, profiles, source_fingerpri
 from scripts.validation.data_macros import definition_blocks, body_statement
 from scripts.validation.numeric_operands import code_part
 from scripts.validation.symbols import parse_symbols
+from scripts.validation.source_sharing import project_includes, shared_sources
 
 LABEL = re.compile(r"^([A-Za-z_][A-Za-z_0-9]*):\s*")
 MACROS = {"startbank", "finishbank", "startdacbank", "dac_setup", "offsetbanktableentry"}
@@ -301,7 +302,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--built", action="store_true")
     args = parser.parse_args(argv)
-    rows = load("config/reconstruction/source_layout.json")["files"]
+    layout = load("config/reconstruction/source_layout.json")
+    rows = layout["files"]
+    variants = shared_sources(ROOT, layout)
     owners = {row["path"]: row for row in rows}
     assets = load("assets/manifest.json")
     binaries = {assets["output"] + "/" + row["path"] for row in assets["assets"]}
@@ -309,7 +312,8 @@ def main(argv=None):
     check_macros(texts, load("config/reconstruction/bank_macros.json"))
     for row in rows:
         if row["role"] == "composition":
-            check(texts[row["path"]], row["composition_contract"], owners, binaries)
+            text = project_includes(row["path"], texts[row["path"]], variants)
+            check(text, row["composition_contract"], owners, binaries)
     if args.built:
         check_built(rows)
     print("[OK] Canonical source composition and fixed bank contracts")

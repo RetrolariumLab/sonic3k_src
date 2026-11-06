@@ -14,6 +14,7 @@ from scripts.build.project import ROOT
 from scripts.validation.semantic_labels import INDEX, source_moves
 from scripts.validation.semantic_labels import profile_maps as semantic_maps
 from scripts.validation.semantic_labels import validate as validate_semantics
+from scripts.validation.source_sharing import shared_sources
 
 REGISTRY = "config/reconstruction/label_renames.json"
 POLICY = "config/reconstruction/relocation.json"
@@ -94,6 +95,9 @@ def validate_registry(root=ROOT, registry=None):
         raise ValueError("Label migration omits or duplicates an original definition")
     policy = read(root, POLICY)
     moves = source_moves(root)
+    variants = shared_sources(root)
+    by_historical = {view.historical: view for view in variants}
+    by_live = {(view.path, profile): view for view in variants for profile in view.profiles}
     profiles = defaultdict(set)
     for profile, engine in policy["engines"].items():
         for name in engine["sources"]:
@@ -123,10 +127,15 @@ def validate_registry(root=ROOT, registry=None):
             raise ValueError("Rename is not a unique original physical definition")
         seen.add(identity)
         expected_profiles = sorted(original_profiles.get(path, set()))
+        view = by_historical.get(path)
+        current_path = view.path if view else moves.get(path, path)
+        current_profiles = profiles[current_path]
+        if view:
+            current_profiles = current_profiles.intersection(view.profiles)
         if (
             not expected_profiles
             or row.get("profiles") != expected_profiles
-            or profiles[moves.get(path, path)] != set(expected_profiles)
+            or current_profiles != set(expected_profiles)
         ):
             raise ValueError("Rename compilation scope differs from its historical source")
         for profile in expected_profiles:
@@ -134,7 +143,7 @@ def validate_registry(root=ROOT, registry=None):
             if key in proposed:
                 raise ValueError("Proposed label collides in one compilation namespace")
             proposed.add(key)
-            expected_definitions[key] = moves.get(path, path)
+            expected_definitions[key] = current_path
     if seen != original_set:
         raise ValueError("Label migration lacks an original physical identity")
     old_tokens = re.compile(r"\b(?:" + "|".join(re.escape(r["old"]) for r in value["renames"]) + r")\b", re.I)
@@ -144,15 +153,20 @@ def validate_registry(root=ROOT, registry=None):
         if not source.is_relative_to(root) or not source.is_file():
             raise ValueError("Migration source leaves the project or is missing: " + path)
         text = source.read_text(encoding="utf-8")
-        if old_tokens.search(text):
-            raise ValueError("Original migrated symbol still occurs in assembly: " + path)
-        for line in text.splitlines():
-            match = LABEL.match(line)
-            if match:
-                for profile in applicable:
-                    key = profile, match[1].lower()
-                    if key in expected_definitions:
-                        actual_definitions[key].append(path)
+        views = defaultdict(list)
+        for profile in applicable:
+            views[by_live.get((path, profile))].append(profile)
+        for view, view_profiles in views.items():
+            expanded = view.expand(text) if view else text
+            if old_tokens.search(expanded):
+                raise ValueError("Original migrated symbol still occurs in assembly: " + path)
+            for line in expanded.splitlines():
+                match = LABEL.match(line)
+                if match:
+                    for profile in view_profiles:
+                        key = profile, match[1].lower()
+                        if key in expected_definitions:
+                            actual_definitions[key].append(path)
     if set(actual_definitions) != set(expected_definitions) or any(
         actual_definitions[key] != [path] for key, path in expected_definitions.items()
     ):

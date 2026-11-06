@@ -11,7 +11,15 @@ from scripts.validation.cohorts import (
     table_slot,
     validate_ownership,
 )
-from scripts.build.relocation import check_bank_storage, check_coverage, digest
+from scripts.build.relocation import (
+    canonical_documents,
+    check_bank_storage,
+    check_coverage,
+    code_labels,
+    digest,
+    shared_document,
+)
+from scripts.validation.source_sharing import SharedVariant
 
 
 class CohortTests(unittest.TestCase):
@@ -82,6 +90,44 @@ class CohortTests(unittest.TestCase):
         self.assertIn("rts\nErrorTrap:\n nop\nEntryPoint:", output)
         with self.assertRaisesRegex(ValueError, "Startup"):
             render(text, [], "Missing")
+
+
+class SharedSourceTests(unittest.TestCase):
+    def setUp(self):
+        self.path = "src/shared/body.s"
+        self.views = [
+            SharedVariant(self.path, f"src/{side}/body.s", f"src/{side}/order.s", "Prefix", prefix, (profile,))
+            for side, prefix, profile in (("s3", "S3_", "s3-us"), ("sk", "SK_", "sk"))
+        ]
+
+    def test_shared_probe_preserves_profile_labels_and_physical_boundaries(self):
+        text = "Entry:\n beq.s {Prefix}Done\n nop\n{Prefix}Done:\n rts\n; End of function Entry\n"
+        document = shared_document(self.path, text, self.views)
+        self.assertEqual([p["after"] for p in document["points"]], [6])
+        self.assertEqual(code_labels(document, "s3-us"), ["Entry", "S3_Done"])
+        self.assertEqual(code_labels(document, "sk"), ["Entry", "SK_Done"])
+        self.assertIn("{Prefix}Done", render(text, document["points"]))
+        self.assertEqual(
+            self.views[0].expand(' dc.b "{Prefix}Done" ; {Prefix}Done'), ' dc.b "{Prefix}Done" ; {Prefix}Done'
+        )
+
+    def test_shared_include_requires_the_exact_binding(self):
+        view = self.views[0]
+        include = f' include "{self.path}"\n'
+        text = 'Prefix equ "S3_"\n' + include
+        self.assertEqual(view.restore_include(text), include)
+        self.assertEqual(view.restore_include(text, historical=True), ' include "src/s3/body.s"\n')
+        for bad in (include, text.replace("S3_", "SK_"), text + include):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                view.restore_include(bad)
+
+    def test_shared_order_interleaves_engines_and_rejects_cycles(self):
+        documents = [{"path": name} for name in ("a", "b", "shared", "after")]
+        engines = {"s3-us": {"sources": ["a", "shared", "after"]}, "sk": {"sources": ["b", "shared"]}}
+        self.assertEqual([r["path"] for r in canonical_documents(documents, engines)], ["a", "b", "shared", "after"])
+        engines["sk"]["sources"] = ["after", "shared", "b"]
+        with self.assertRaisesRegex(ValueError, "Conflicting"):
+            canonical_documents(documents, engines)
 
 
 class BankStorageTests(unittest.TestCase):
